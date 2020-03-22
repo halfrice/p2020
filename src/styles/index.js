@@ -1,3 +1,5 @@
 import Globals from "./globals"
+import Title from "./Title"
+import theme from "./theme.yaml"
 
-export { Globals }
+export { Globals, Title, theme }

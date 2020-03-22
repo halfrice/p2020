@@ -1,12 +1,19 @@
 import React from "react"
+import styled from "styled-components"
 import "normalize.css/normalize.css"
-import { Globals } from "~styles"
+import { Globals, Title, theme } from "~styles"
+
+const { color } = theme
+
+const TitleGreen = styled(Title)`
+  color: ${color.green};
+`
 
 const Layout = ({ children }) => {
   return (
     <>
       <Globals />
-      <h2>Layout</h2>
+      <TitleGreen>Layout</TitleGreen>
       {children}
     </>
   )

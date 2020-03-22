@@ -1,4 +1,7 @@
 import { createGlobalStyle } from "styled-components"
+import theme from "./theme.yaml"
+
+const { color } = theme
 
 const Globals = createGlobalStyle`
   html {
@@ -12,6 +15,7 @@ const Globals = createGlobalStyle`
   }
 
   body {
+    background-color: ${color.dark};
     font-weight: 400;
   }
 
@@ -20,7 +24,7 @@ const Globals = createGlobalStyle`
   h3,
   h4,
   h5 {
-    color: deeppink;
+    color: ${color.darkPink};
     font-weight: 600;
   }
 `
