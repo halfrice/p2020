@@ -1,8 +1,10 @@
 import React from "react"
-import Layout from "../components/layout"
+import { Layout } from "~components"
 
-export default () => (
+const IndexPage = () => (
   <Layout>
     <div>P2020</div>
   </Layout>
 )
+
+export default IndexPage
