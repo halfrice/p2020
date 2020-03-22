@@ -14,9 +14,13 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
+    "babel-plugin-styled-components": "^1.10.7",
     "gatsby": "^2.19.45",
+    "gatsby-plugin-styled-components": "^3.2.0",
+    "normalize.css": "^8.0.1",
     "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react-dom": "^16.12.0",
+    "styled-components": "^5.0.1"
   },
   "devDependencies": {
     "prettier": "^1.19.1"
