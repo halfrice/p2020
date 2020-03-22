@@ -25,3 +25,5 @@ color:
   darkBlue: "#0969F9"
   purple: "#EE00FF"
   darkPurple: "#9A2DFF"
+
+transition: "all 0.5s ease-in-out"

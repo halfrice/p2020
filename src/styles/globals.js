@@ -27,5 +27,18 @@ const Globals = createGlobalStyle`
     color: ${color.darkPink};
     font-weight: 600;
   }
+
+  a {
+    color: ${color.blue};
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    text-decoration: none;
+    transition: ${theme.transition};
+    &:hover {
+      color: ${color.darkSlate};
+      outline: 0;
+    }
+  }
 `
 export default Globals
