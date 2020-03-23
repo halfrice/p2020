@@ -26,4 +26,6 @@ color:
   purple: "#EE00FF"
   darkPurple: "#9A2DFF"
 
+easing: "cubic-bezier(0.645, 0.045, 0.355, 1)"
 transition: "all 0.5s ease-in-out"
+shortTransition: "all 0.25s ease-in-out"

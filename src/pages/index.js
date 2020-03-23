@@ -1,18 +1,35 @@
 import React from "react"
-import styled from "styled-components"
-import { Layout } from "~components"
-import { Title, theme } from "~styles"
+import PropTypes from "prop-types"
+import { graphql } from "gatsby"
+import { Hero, Layout } from "~components"
 
-const { color } = theme
+const IndexPage = ({ data }) => {
+  return (
+    <Layout>
+      <Hero data={data.hero.edges[0].node} />
+    </Layout>
+  )
+}
 
-const TitlePurple = styled(Title)`
-  color: ${color.darkPurple};
-`
-
-const IndexPage = () => (
-  <Layout>
-    <TitlePurple>P2020</TitlePurple>
-  </Layout>
-)
+IndexPage.propTypes = {
+  data: PropTypes.object.isRequired,
+}
 
 export default IndexPage
+
+export const indexPageQuery = graphql`
+  {
+    hero: allMarkdownRemark(filter: { fileAbsolutePath: { regex: "/hero/" } }) {
+      edges {
+        node {
+          frontmatter {
+            name
+            title
+            location
+          }
+          html
+        }
+      }
+    }
+  }
+`
