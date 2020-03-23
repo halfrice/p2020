@@ -2,15 +2,22 @@ import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import { CSSTransition, TransitionGroup } from "react-transition-group"
 import styled from "styled-components"
-import { theme } from "~styles"
+import { mixins, theme } from "~styles"
 
 const { color } = theme
+const { flex } = mixins
 
 const HeroContainer = styled.div`
+  ${flex.center};
   min-height: calc(100vh);
 `
 const Name = styled.h1`
   color: ${color.lightRed};
+  margin-top: 0;
+`
+const TransitionContainer = styled(TransitionGroup)`
+  width: 100%;
+  max-width: 900px;
 `
 const Title = styled.h2`
   color: ${color.blue};
@@ -33,19 +40,19 @@ const Hero = ({ data }) => {
   }, [])
 
   const name = () => (
-    <Name style={{ transitionDelay: "200ms" }}>{frontmatter.name}</Name>
+    <Name style={{ transitionDelay: "30ms" }}>{frontmatter.name}</Name>
   )
   const title = () => (
-    <Title style={{ transitionDelay: "400ms" }}>{frontmatter.title}</Title>
+    <Title style={{ transitionDelay: "600ms" }}>{frontmatter.title}</Title>
   )
   const location = () => (
-    <Location style={{ transitionDelay: "600ms" }}>
+    <Location style={{ transitionDelay: "900ms" }}>
       {frontmatter.location}
     </Location>
   )
   const content = () => (
     <Content
-      style={{ transitionDelay: "800ms" }}
+      style={{ transitionDelay: "1200ms" }}
       dangerouslySetInnerHTML={{ __html: html }}
     />
   )
@@ -54,16 +61,14 @@ const Hero = ({ data }) => {
 
   return (
     <HeroContainer>
-      <TransitionGroup>
+      <TransitionContainer>
         {isMounted &&
-          items.map((item, i) => {
-            return (
-              <CSSTransition key={i} classNames={`fadeup`} timeout={3000}>
-                {item}
-              </CSSTransition>
-            )
-          })}
-      </TransitionGroup>
+          items.map((item, i) => (
+            <CSSTransition key={i} classNames={`fadeup`} timeout={3000}>
+              {item}
+            </CSSTransition>
+          ))}
+      </TransitionContainer>
     </HeroContainer>
   )
 }
