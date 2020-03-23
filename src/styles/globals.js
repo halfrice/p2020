@@ -48,7 +48,7 @@ const Globals = createGlobalStyle`
 
   .fadeup-enter {
     opacity: 0.01;
-    transform: translateY(25px);
+    transform: translateY(50px);
     transition: opacity 500ms ${theme.easing}, transform 500ms ${theme.easing};
   }
   .fadeup-enter-active {
@@ -58,7 +58,7 @@ const Globals = createGlobalStyle`
   }
   .fadedown-enter {
     opacity: 0.01;
-    transform: translateY(-25px);
+    transform: translateY(-50px);
     transition: opacity 500ms ${theme.easing}, transform 500ms ${theme.easing};
   }
   .fadedown-enter-active {

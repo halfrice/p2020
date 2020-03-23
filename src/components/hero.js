@@ -2,22 +2,21 @@ import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import { CSSTransition, TransitionGroup } from "react-transition-group"
 import styled from "styled-components"
-import { mixins, theme } from "~styles"
+import { mixins, Section, theme } from "~styles"
 
 const { color } = theme
 const { flex } = mixins
 
-const HeroContainer = styled.div`
+const HeroContainer = styled(Section)`
   ${flex.center};
-  min-height: calc(100vh);
+  height: calc(100vh);
+`
+const TransitionContainer = styled(TransitionGroup)`
+  width: 100%;
 `
 const Name = styled.h1`
   color: ${color.lightRed};
   margin-top: 0;
-`
-const TransitionContainer = styled(TransitionGroup)`
-  width: 100%;
-  max-width: 900px;
 `
 const Title = styled.h2`
   color: ${color.blue};
@@ -35,24 +34,24 @@ const Hero = ({ data }) => {
   const { frontmatter, html } = data
 
   useEffect(() => {
-    const timeout = setTimeout(() => setIsMounted(true), 200)
+    const timeout = setTimeout(() => setIsMounted(true), 100)
     return () => clearTimeout(timeout)
   }, [])
 
   const name = () => (
-    <Name style={{ transitionDelay: "30ms" }}>{frontmatter.name}</Name>
+    <Name style={{ transitionDelay: "100ms" }}>{frontmatter.name}</Name>
   )
   const title = () => (
-    <Title style={{ transitionDelay: "600ms" }}>{frontmatter.title}</Title>
+    <Title style={{ transitionDelay: "200ms" }}>{frontmatter.title}</Title>
   )
   const location = () => (
-    <Location style={{ transitionDelay: "900ms" }}>
+    <Location style={{ transitionDelay: "300ms" }}>
       {frontmatter.location}
     </Location>
   )
   const content = () => (
     <Content
-      style={{ transitionDelay: "1200ms" }}
+      style={{ transitionDelay: "400ms" }}
       dangerouslySetInnerHTML={{ __html: html }}
     />
   )

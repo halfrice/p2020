@@ -2,11 +2,14 @@ import React from "react"
 import PropTypes from "prop-types"
 import { graphql } from "gatsby"
 import { Hero, Layout } from "~components"
+import { Main } from "~styles"
 
 const IndexPage = ({ data }) => {
   return (
     <Layout>
-      <Hero data={data.hero.edges[0].node} />
+      <Main>
+        <Hero data={data.hero.edges[0].node} />
+      </Main>
     </Layout>
   )
 }
