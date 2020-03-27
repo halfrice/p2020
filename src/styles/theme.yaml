@@ -1,6 +1,6 @@
 color:
   black: "#000000"
-  lightBlack: "#08090C"
+  darker: "#08090C"
   dark: "#101114"
   darkGrey: "#202124"
   grey: "#404144"
@@ -25,7 +25,21 @@ color:
   darkBlue: "#0969F9"
   purple: "#EE00FF"
   darkPurple: "#9A2DFF"
+  retroAqua: "#2de2e6"
+  retroBlue: "#035ee8"
+  retroRed: "#d40078"
+  retroPink: "#f6019d"
+  retroPurple: "#9700cc"
+  cyberGreen: "#00ff9f"
+  cyberAqua: "#00b8ff"
+  cyberBlue: "#001eff"
+  cyberDarkPurple: "#bd00ff"
+  cyberPurple: "#d600ff"
 
 easing: "cubic-bezier(0.645, 0.045, 0.355, 1)"
 transition: "all 0.5s ease-in-out"
 shortTransition: "all 0.25s ease-in-out"
+
+nav:
+  height: "2.75rem"
+  heightMobile: "3rem"

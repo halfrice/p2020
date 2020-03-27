@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import "normalize.css/normalize.css"
+import { Nav } from "~components"
 import { Globals } from "~styles"
 
 const LayoutContainer = styled.div`
@@ -14,6 +15,7 @@ const Layout = ({ children }) => {
   return (
     <LayoutContainer>
       <Globals />
+      <Nav />
       {children}
     </LayoutContainer>
   )

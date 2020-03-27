@@ -2,30 +2,33 @@ import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import { CSSTransition, TransitionGroup } from "react-transition-group"
 import styled from "styled-components"
-import { mixins, Section, theme } from "~styles"
+import { device, mixins, Section, theme } from "~styles"
 
-const { color } = theme
+const { color, nav } = theme
 const { flex } = mixins
 
 const HeroContainer = styled(Section)`
   ${flex.center};
-  height: calc(100vh);
+  height: 100%;
+  min-height: calc(100vh - ${nav.height});
+  margin-top: ${nav.height};
+  ${device.tablet`margin-top: ${nav.heightMobile};`};
 `
 const TransitionContainer = styled(TransitionGroup)`
   width: 100%;
 `
 const Name = styled.h1`
-  color: ${color.lightRed};
+  color: ${color.cyberAqua};
   margin-top: 0;
 `
 const Title = styled.h2`
-  color: ${color.blue};
+  color: ${color.cyberDarkPurple};
 `
 const Location = styled.h3`
-  color: ${color.green};
+  color: ${color.cyberGreen};
 `
 const Content = styled.p`
-  color: ${color.light};
+  color: ${color.retroPink};
 `
 
 const Hero = ({ data }) => {
@@ -34,7 +37,7 @@ const Hero = ({ data }) => {
   const { frontmatter, html } = data
 
   useEffect(() => {
-    const timeout = setTimeout(() => setIsMounted(true), 100)
+    const timeout = setTimeout(() => setIsMounted(true), 500)
     return () => clearTimeout(timeout)
   }, [])
 

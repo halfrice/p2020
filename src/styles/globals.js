@@ -15,7 +15,8 @@ const Globals = createGlobalStyle`
   }
 
   body {
-    background-color: ${color.dark};
+    background-color: ${color.darker};
+    font-family: sans-serif;
     font-weight: 400;
   }
 
@@ -29,21 +30,34 @@ const Globals = createGlobalStyle`
   }
 
   a {
-    color: ${color.blue};
+    color: inherit;
     cursor: pointer;
     display: inline-block;
     position: relative;
     text-decoration: none;
-    transition: ${theme.transition};
-    &:hover {
-      color: ${color.darkSlate};
-      outline: 0;
-    }
   }
 
   p {
     margin: 0;
     padding: 0;
+  }
+
+  ul, ol {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  button {
+    padding: 0;
+    margin: 0;
+    border: 1px solid transparent;
+
+    &:focus,
+    &:active {
+      border: 1px solid ${color.blue};
+      outline-color: ${color.blue};
+    }
   }
 
   .fadeup-enter {
@@ -58,7 +72,7 @@ const Globals = createGlobalStyle`
   }
   .fadedown-enter {
     opacity: 0.01;
-    transform: translateY(-50px);
+    transform: translateY(-25px);
     transition: opacity 500ms ${theme.easing}, transform 500ms ${theme.easing};
   }
   .fadedown-enter-active {

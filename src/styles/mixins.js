@@ -26,28 +26,28 @@ const mixins = {
   },
   padding: {
     top: css`
-      padding-top: 9em;
-      ${device.desktop`padding-top: 6em;`};
-      ${device.tablet`padding-top: 3em;`};
-      ${device.phone`padding-top: 2em;`};
-    `,
-    right: css`
-      padding-right: 9em;
-      ${device.desktop`padding-right: 6em;`};
-      ${device.tablet`padding-right: 3em;`};
-      ${device.phone`padding-right: 2em;`};
+      padding-top: 9rem;
+      ${device.desktop`padding-top: 6rem;`};
+      ${device.tablet`padding-top: 3rem;`};
+      ${device.phone`padding-top: 1.5rem;`};
     `,
     bottom: css`
-      padding-bottom: 9em;
-      ${device.desktop`padding-bottom: 6em;`};
-      ${device.tablet`padding-bottom: 3em;`};
-      ${device.phone`padding-bottom: 2em;`};
+      padding-bottom: 9rem;
+      ${device.desktop`padding-bottom: 6rem;`};
+      ${device.tablet`padding-bottom: 3rem;`};
+      ${device.phone`padding-bottom: 1.5rem;`};
     `,
     left: css`
-      padding-left: 9em;
-      ${device.desktop`padding-left: 6em;`};
-      ${device.tablet`padding-left: 3em;`};
-      ${device.phone`padding-left: 2em;`};
+      padding-left: 9rem;
+      ${device.desktop`padding-left: 6rem;`};
+      ${device.tablet`padding-left: 3rem;`};
+      ${device.phone`padding-left: 1.5rem;`};
+    `,
+    right: css`
+      padding-right: 9rem;
+      ${device.desktop`padding-right: 6rem;`};
+      ${device.tablet`padding-right: 3rem;`};
+      ${device.phone`padding-right: 1.5rem;`};
     `,
   },
 }

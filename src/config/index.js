@@ -17,4 +17,18 @@ module.exports = {
     display: "minimal-ui",
     lang: "en",
   },
+  navLinks: [
+    {
+      name: "Apps",
+      url: "/apps",
+    },
+    {
+      name: "About",
+      url: "/about",
+    },
+    {
+      name: "Contact",
+      url: "/contact",
+    },
+  ],
 }
