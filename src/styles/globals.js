@@ -15,7 +15,7 @@ const Globals = createGlobalStyle`
   }
 
   body {
-    background-color: ${color.darker};
+    background-color: ${color.darkest};
     font-family: sans-serif;
     font-weight: 400;
   }
@@ -51,13 +51,8 @@ const Globals = createGlobalStyle`
   button {
     padding: 0;
     margin: 0;
-    border: 1px solid transparent;
-
-    &:focus,
-    &:active {
-      border: 1px solid ${color.blue};
-      outline-color: ${color.blue};
-    }
+    border: none;
+    outline: none;
   }
 
   .fadeup-enter {

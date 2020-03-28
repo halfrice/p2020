@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { graphql } from "gatsby"
-import { Hero, Layout } from "~components"
+import { About, Hero, Layout } from "~components"
 import { Main } from "~styles"
 
 const IndexPage = ({ data }) => {
@@ -9,6 +9,7 @@ const IndexPage = ({ data }) => {
     <Layout>
       <Main>
         <Hero data={data.hero.edges[0].node} />
+        <About data={data.about.edges[0].node} />
       </Main>
     </Layout>
   )
@@ -29,6 +30,19 @@ export const indexPageQuery = graphql`
             name
             title
             location
+          }
+          html
+        }
+      }
+    }
+    about: allMarkdownRemark(
+      filter: { fileAbsolutePath: { regex: "/about/" } }
+    ) {
+      edges {
+        node {
+          frontmatter {
+            avatar
+            title
           }
           html
         }

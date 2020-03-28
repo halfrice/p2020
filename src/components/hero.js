@@ -9,6 +9,7 @@ const { flex } = mixins
 
 const HeroContainer = styled(Section)`
   ${flex.center};
+  max-width: 75rem;
   height: 100%;
   min-height: calc(100vh - ${nav.height});
   margin-top: ${nav.height};

@@ -1,5 +1,6 @@
 color:
   black: "#000000"
+  darkest: "#04050a"
   darker: "#08090C"
   dark: "#101114"
   darkGrey: "#202124"

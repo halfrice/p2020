@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { Link } from "gatsby"
 import { CSSTransition, TransitionGroup } from "react-transition-group"
+import AnchorLink from "react-anchor-link-smooth-scroll"
 import styled from "styled-components"
 import { navLinks } from "~config"
 import { Button, device, Main, mixins, theme } from "~styles"
@@ -22,6 +23,7 @@ const NavInner = styled.nav`
   ${flex.between};
   align-items: center;
   width: 100%;
+  max-width: 75rem;
   height: 100%;
   overflow: visible;
 `
@@ -48,7 +50,7 @@ const ListItem = styled(Button)`
     margin-right: -0.75rem;
   }
 `
-const NavLink = styled(Link)``
+const NavLink = styled(AnchorLink)``
 
 const Nav = () => {
   const [isMounted, setIsMounted] = useState(false)
@@ -83,7 +85,7 @@ const Nav = () => {
                 navLinks.map(({ url, name }, i) => (
                   <CSSTransition key={i} classNames="fadedown" timeout={3000}>
                     <ListItem style={{ transitionDelay: `${(i + 1) * 100}ms` }}>
-                      <NavLink to={url}>{name}</NavLink>
+                      <NavLink href={url}>{name}</NavLink>
                     </ListItem>
                   </CSSTransition>
                 ))}
