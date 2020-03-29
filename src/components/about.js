@@ -7,7 +7,6 @@ const { color } = theme
 
 const AboutContainer = styled(Section)`
   max-width: 75rem;
-  height: calc(200vh);
 `
 const FlexContainer = styled.div`
   ${mixins.flex.between};

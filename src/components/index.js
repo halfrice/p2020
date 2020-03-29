@@ -1,6 +1,7 @@
 import About from "./about"
+import Contact from "./contact"
 import Hero from "./hero"
 import Layout from "./layout"
 import Nav from "./nav"
 
-export { About, Hero, Layout, Nav }
+export { About, Contact, Hero, Layout, Nav }
