@@ -37,6 +37,20 @@ color:
   cyberDarkPurple: "#bd00ff"
   cyberPurple: "#d600ff"
 
+fontSize:
+  default: "16px"
+  xxs: "0.75rem"
+  xs: "0.83rem"
+  sm: "0.91rem"
+  md: "1rem"
+  lg: "1.2rem"
+  xl: "1.4rem"
+  xxl: "1.6rem"
+  xxxl: "1.8rem"
+  h3: "2rem"
+  h2: "3rem"
+  h1: "4rem"
+
 easing: "cubic-bezier(0.645, 0.045, 0.355, 1)"
 transition: "all 0.5s ease-in-out"
 shortTransition: "all 0.25s ease-in-out"

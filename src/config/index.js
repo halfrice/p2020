@@ -31,4 +31,42 @@ module.exports = {
       url: "#contact",
     },
   ],
+  socialMedia: [
+    {
+      name: "Facebook",
+      url: "https://facebook.com",
+      color: "#3b5998",
+      username: "Facebook",
+    },
+    {
+      name: "Google",
+      url: "mailto:gmail@gmail.com",
+      color: "#4285f4",
+      username: "Gmail.com",
+    },
+    {
+      name: "Twitter",
+      url: "https://twitter.com/",
+      color: "#1da1f2",
+      username: "Twitter",
+    },
+    {
+      name: "Linkedin",
+      url: "https://linkedin.com",
+      color: "#405de6",
+      username: "Linkedin",
+    },
+    {
+      name: "Github",
+      url: "https://github.com/halfrice",
+      color: "#4078c0",
+      username: "Github",
+    },
+    {
+      name: "Codepen",
+      url: "https://codepen.io/halfrice",
+      color: "#0ebeff",
+      username: "Codepen",
+    },
+  ],
 }

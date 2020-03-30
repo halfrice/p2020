@@ -55,6 +55,12 @@ const Globals = createGlobalStyle`
     outline: none;
   }
 
+  svg {
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+  }
+
   .fadeup-enter {
     opacity: 0.01;
     transform: translateY(50px);

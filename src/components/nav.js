@@ -18,6 +18,7 @@ const NavContainer = styled(Main)`
   ${device.tablet`height: ${nav.heightMobile};`};
   background-color: ${color.black};
   overflow-x: auto;
+  z-index: 20;
 `
 const NavInner = styled.nav`
   ${flex.between};
@@ -29,7 +30,6 @@ const NavInner = styled.nav`
 `
 const TransitionContainer = styled(TransitionGroup)`
   height: 100%;
-  max-width: 700px;
 `
 const LogoButton = styled(Button)`
   margin-left: -0.75rem;

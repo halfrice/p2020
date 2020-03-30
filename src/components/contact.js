@@ -1,6 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
+import { Social } from "~components"
 import { mixins, Section, theme, Title } from "~styles"
 
 const { color } = theme
@@ -10,10 +11,11 @@ const ContactContainer = styled(Section)`
   ${flex.center};
   align-items: flex-start;
   flex-direction: column;
-  max-width: 37.5rem;
-  margin-bottom: 6.25rem;
+  max-width: 48rem;
+  margin-bottom: 9rem;
 `
 const TitleContainer = styled.div`
+  ${flex.start};
   margin: 0 auto;
 `
 const ContentContainer = styled.div`
@@ -35,6 +37,7 @@ const Contact = ({ data }) => {
       </TitleContainer>
       <ContentContainer>
         <Content dangerouslySetInnerHTML={{ __html: html }} />
+        <Social />
       </ContentContainer>
     </ContactContainer>
   )
