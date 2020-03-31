@@ -27,11 +27,11 @@ const mixins = {
   padding: {
     top: css`
       padding-top: 9rem;
-      ${device.tablet`padding-top: 6rem;`};
+      ${device.phone`padding-top: 6rem;`};
     `,
     bottom: css`
       padding-bottom: 9rem;
-      ${device.tablet`padding-bottom: 6rem;`};
+      ${device.phone`padding-bottom: 6rem;`};
     `,
     left: css`
       padding-left: 9rem;

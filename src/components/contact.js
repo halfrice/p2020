@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
 import { Social } from "~components"
-import { mixins, Section, theme, Title } from "~styles"
+import { device, mixins, Section, theme, Title } from "~styles"
 
 const { color } = theme
 const { flex } = mixins
@@ -12,7 +12,8 @@ const ContactContainer = styled(Section)`
   align-items: flex-start;
   flex-direction: column;
   max-width: 48rem;
-  margin-bottom: 9rem;
+  /* margin-bottom: 6rem; */
+  /* ${device.tablet`margin-bottom: 2rem;`}; */
 `
 const TitleContainer = styled.div`
   ${flex.start};

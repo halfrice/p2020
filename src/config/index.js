@@ -31,6 +31,11 @@ module.exports = {
       url: "#contact",
     },
   ],
+  footerLinks: [
+    { name: "React", url: "#" },
+    { name: "GatsbyJS", url: "#" },
+    { name: "Netlify", url: "#" },
+  ],
   socialMedia: [
     {
       name: "Facebook",
