@@ -28,12 +28,22 @@ module.exports = {
         path: `${__dirname}/src/content/`,
       },
     },
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
     `gatsby-plugin-offline`,
     `gatsby-plugin-styled-components`,
     {
       resolve: `gatsby-transformer-remark`,
       options: {
-        plugins: [],
+        plugins: [
+          {
+            resolve: "gatsby-remark-images",
+            options: {
+              quality: 90,
+              backgroundColor: "transparent",
+            },
+          },
+        ],
       },
     },
   ],

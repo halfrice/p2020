@@ -1,4 +1,5 @@
 ---
+avatar: "./avatar.jpg"
 name: "P2020"
 title: "Software"
 location: "San Jose, California"

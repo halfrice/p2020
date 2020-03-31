@@ -1,5 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
+import Img from "gatsby-image"
 import styled from "styled-components"
 import { device, mixins, theme, Section, Title } from "~styles"
 
@@ -36,16 +37,23 @@ const AvatarContainer = styled.div`
   ${device.tablet`margin: 0 auto;`};
   overflow: hidden;
 `
-const Avatar = styled.div`
+const Avatar = styled(Img)`
   background-color: ${color.dark};
+  border-radius: 3px;
   width: 100%;
   height: 18rem;
   ${device.tablet`height: 15rem`};
+  transition: ${theme.transition};
+  object-fit: cover;
+  &:hover {
+    transform: scale(1.1);
+    ${device.tablet`transform: none`};
+  }
 `
 
 const About = ({ data }) => {
   const { frontmatter, html } = data
-  const { title } = frontmatter
+  const { image, title } = frontmatter
 
   return (
     <AboutContainer id="about">
@@ -56,7 +64,7 @@ const About = ({ data }) => {
         </ContentContainer>
         <ImageContainer>
           <AvatarContainer>
-            <Avatar />
+            <Avatar fluid={image.childImageSharp.fluid} alt="About image" />
           </AvatarContainer>
         </ImageContainer>
       </FlexContainer>

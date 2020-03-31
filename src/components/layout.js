@@ -10,14 +10,17 @@ const LayoutContainer = styled.div`
   grid-template-columns: 100%;
   min-height: 100vh;
 `
+const Display = styled.div``
 
 const Layout = ({ children }) => {
   return (
     <LayoutContainer>
       <Globals />
-      <Nav />
-      {children}
-      <Footer />
+      <Display>
+        <Nav />
+        {children}
+        <Footer />
+      </Display>
     </LayoutContainer>
   )
 }

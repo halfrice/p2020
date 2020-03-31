@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
+import Img from "gatsby-image"
 import { CSSTransition, TransitionGroup } from "react-transition-group"
 import styled from "styled-components"
 import { device, mixins, Section, theme } from "~styles"
@@ -17,6 +18,14 @@ const HeroContainer = styled(Section)`
 `
 const TransitionContainer = styled(TransitionGroup)`
   width: 100%;
+`
+const Avatar = styled(Img)`
+  border-radius: 50%;
+  border: 1px solid transparent;
+  margin: 0 0 1.5rem 0;
+  width: 7rem;
+  height: 7rem;
+  overflow: hidden;
 `
 const Name = styled.h1`
   color: ${color.cyberAqua};
@@ -42,25 +51,32 @@ const Hero = ({ data }) => {
     return () => clearTimeout(timeout)
   }, [])
 
+  const avatar = () => (
+    <Avatar
+      style={{ transitionDelay: "100ms" }}
+      fluid={frontmatter.avatar.childImageSharp.fluid}
+      alt="Avatar"
+    />
+  )
   const name = () => (
-    <Name style={{ transitionDelay: "100ms" }}>{frontmatter.name}</Name>
+    <Name style={{ transitionDelay: "200ms" }}>{frontmatter.name}</Name>
   )
   const title = () => (
-    <Title style={{ transitionDelay: "200ms" }}>{frontmatter.title}</Title>
+    <Title style={{ transitionDelay: "300ms" }}>{frontmatter.title}</Title>
   )
   const location = () => (
-    <Location style={{ transitionDelay: "300ms" }}>
+    <Location style={{ transitionDelay: "400ms" }}>
       {frontmatter.location}
     </Location>
   )
   const content = () => (
     <Content
-      style={{ transitionDelay: "400ms" }}
+      style={{ transitionDelay: "500ms" }}
       dangerouslySetInnerHTML={{ __html: html }}
     />
   )
 
-  const items = [name, title, location, content]
+  const items = [avatar, name, title, location, content]
 
   return (
     <HeroContainer>
