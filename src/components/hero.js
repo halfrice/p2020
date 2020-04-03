@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import Img from "gatsby-image"
 import { CSSTransition, TransitionGroup } from "react-transition-group"
 import styled from "styled-components"
-import { device, mixins, Section, theme } from "~styles"
+import { mixins, Section, theme } from "~styles"
 
 const { color, nav } = theme
 const { flex } = mixins
@@ -11,10 +11,9 @@ const { flex } = mixins
 const HeroContainer = styled(Section)`
   ${flex.center};
   max-width: 75rem;
-  height: 100%;
-  min-height: calc(100vh - ${nav.height});
-  margin-top: ${nav.height};
-  ${device.tablet`margin-top: ${nav.heightMobile};`};
+  height: calc(100vh - (${nav.heightPristine}));
+  min-height: 24rem;
+  margin-top: ${nav.heightPristine};
 `
 const TransitionContainer = styled(TransitionGroup)`
   width: 100%;

@@ -56,5 +56,7 @@ transition: "all 0.5s ease-in-out"
 shortTransition: "all 0.25s ease-in-out"
 
 nav:
+  heightPristine: "6rem"
+  heightPristineMobile: "6rem"
   height: "2.75rem"
   heightMobile: "3rem"

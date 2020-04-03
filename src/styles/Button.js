@@ -8,12 +8,9 @@ const Button = styled.button`
   cursor: pointer;
   background-color: transparent;
   border-radius: 3px;
-  height: 100%;
+  /* height: 100%; */
+  padding: 0.5rem 0.75rem;
   text-decoration: none;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
   transition: none;
 
   &:hover,
