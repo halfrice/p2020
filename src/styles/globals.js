@@ -16,6 +16,7 @@ const Globals = createGlobalStyle`
 
   body {
     background-color: ${color.darker};
+    color: ${color.light};
     font-family: sans-serif;
     font-weight: 400;
   }

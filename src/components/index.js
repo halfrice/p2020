@@ -1,4 +1,5 @@
 import About from "./about"
+import Apps from "./apps"
 import Clock from "./clock"
 import Contact from "./contact"
 import Footer from "./footer"
@@ -11,6 +12,7 @@ import Social from "./social"
 
 export {
   About,
+  Apps,
   Clock,
   Contact,
   Footer,
