@@ -3,12 +3,12 @@ import { Link } from "gatsby"
 import { CSSTransition, TransitionGroup } from "react-transition-group"
 import AnchorLink from "react-anchor-link-smooth-scroll"
 import styled from "styled-components"
-import { Hamburger } from "~components"
+import { Hamburger, Menu } from "~components"
 import { navLinks } from "~config"
 import { Button, device, Main, mixins, theme } from "~styles"
 import { throttle, useEventListener } from "~utils"
 
-const { color, nav } = theme
+const { color, fontSize, nav } = theme
 const { flex } = mixins
 
 const NavContainer = styled(Main)`
@@ -89,10 +89,19 @@ const Nav = () => {
     }
   }
 
+  const getNavHeight = () => {
+    const scale = parseInt(fontSize.default)
+    return scrollDirection === "none"
+      ? parseFloat(nav.heightPristine) * scale
+      : isDeviceMobile
+      ? parseFloat(nav.heightMobile) * scale
+      : parseFloat(nav.height) * scale
+  }
+
   const handleScroll = useCallback(
     throttle(() => {
       const y = window.scrollY
-      const delta = 5
+      const delta = 4
 
       if (!isMounted || Math.abs(prevY - y) <= delta) {
         return
@@ -143,7 +152,11 @@ const Nav = () => {
             {isMounted && (
               <CSSTransition classNames="fadedown" timeout={3000}>
                 <LogoButton>
-                  <Link to="/" style={{ transitionDelay: `100ms` }}>
+                  <Link
+                    to="/"
+                    onClick={isHamburgerCooked ? toggleHamburger : null}
+                    style={{ transitionDelay: `100ms` }}
+                  >
                     P2020
                   </Link>
                 </LogoButton>
@@ -158,7 +171,7 @@ const Nav = () => {
               <CSSTransition classNames="fadedown" timeout={3000}>
                 <HamburgerButton
                   onClick={toggleHamburger}
-                  style={{ transitionDelay: `400ms` }}
+                  style={{ transitionDelay: `200ms` }}
                 >
                   <Hamburger isToggled={isHamburgerCooked} />
                 </HamburgerButton>
@@ -183,6 +196,12 @@ const Nav = () => {
           </List>
         </Links>
       </NavInner>
+
+      <Menu
+        isMenuOpen={isHamburgerCooked}
+        toggleMenu={toggleHamburger}
+        navHeight={getNavHeight()}
+      />
     </NavContainer>
   )
 }

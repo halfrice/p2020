@@ -5,7 +5,19 @@ import Footer from "./footer"
 import Hamburger from "./hamburger"
 import Hero from "./hero"
 import Layout from "./layout"
+import Menu from "./menu"
 import Nav from "./nav"
 import Social from "./social"
 
-export { About, Clock, Contact, Footer, Hamburger, Hero, Layout, Nav, Social }
+export {
+  About,
+  Clock,
+  Contact,
+  Footer,
+  Hamburger,
+  Hero,
+  Layout,
+  Menu,
+  Nav,
+  Social,
+}
