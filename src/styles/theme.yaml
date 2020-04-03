@@ -60,3 +60,10 @@ nav:
   heightPristineMobile: "6rem"
   height: "2.75rem"
   heightMobile: "3rem"
+
+hamburger:
+  width: "2rem"
+  before: "top 0.25s ease-in 0.125s, transform 0.25s ease-in"
+  beforeActive: "top 0.125s ease-out, transform 0.3s ease-in"
+  after: "bottom 0.25s ease-in 0.125s, transform 0.25s ease-in"
+  afterActive: "bottom 0.125s ease-out, transform 0.3s ease-in"

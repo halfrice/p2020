@@ -3,6 +3,7 @@ import { Link } from "gatsby"
 import { CSSTransition, TransitionGroup } from "react-transition-group"
 import AnchorLink from "react-anchor-link-smooth-scroll"
 import styled from "styled-components"
+import { Hamburger } from "~components"
 import { navLinks } from "~config"
 import { Button, device, Main, mixins, theme } from "~styles"
 import { throttle, useEventListener } from "~utils"
@@ -44,8 +45,16 @@ const Logo = styled.div`
 const LogoButton = styled(Button)`
   margin-left: -0.75rem;
 `
+const Bread = styled.div`
+  display: none;
+  ${device.tablet`display: flex;`};
+`
+const HamburgerButton = styled(Button)`
+  margin-right: -0.75rem;
+`
 const Links = styled.div`
   ${flex.center};
+  ${device.tablet`display: none;`};
   height: 100%;
 `
 const List = styled.ol`
@@ -63,17 +72,24 @@ const NavLink = styled(AnchorLink)``
 
 const Nav = () => {
   const [isMounted, setIsMounted] = useState(false)
+  const [isDeviceMobile, setIsDeviceMobile] = useState(false)
+  const [isHamburgerCooked, setIsHamburgerCooked] = useState(false)
   const [scrollDirection, setScrollDirection] = useState("none")
   const [prevY, setPrevY] = useState(0)
 
-  useEffect(() => {
-    const timeout = setTimeout(() => setIsMounted(true), 0)
-    return () => {
-      clearTimeout(timeout)
-    }
-  }, [])
+  const toggleHamburger = () => {
+    setIsHamburgerCooked(!isHamburgerCooked)
+  }
 
-  const scrollHandler = useCallback(
+  const setDevice = () => {
+    if (window.innerWidth <= 900) {
+      setIsDeviceMobile(true)
+    } else {
+      setIsDeviceMobile(false)
+    }
+  }
+
+  const handleScroll = useCallback(
     throttle(() => {
       const y = window.scrollY
       const delta = 5
@@ -98,7 +114,26 @@ const Nav = () => {
     [isMounted, prevY, scrollDirection, window]
   )
 
-  useEventListener("scroll", scrollHandler)
+  const handleResize = useCallback(
+    throttle(() => {
+      setDevice()
+      if (!isDeviceMobile && isHamburgerCooked) {
+        toggleHamburger()
+      }
+    }, 100),
+    [isDeviceMobile]
+  )
+
+  useEffect(() => {
+    setDevice()
+    const timeout = setTimeout(() => setIsMounted(true), 0)
+    return () => {
+      clearTimeout(timeout)
+    }
+  }, [])
+
+  useEventListener("scroll", handleScroll)
+  useEventListener("resize", handleResize)
 
   return (
     <NavContainer scrollDirection={scrollDirection}>
@@ -116,6 +151,21 @@ const Nav = () => {
             )}
           </TransitionContainer>
         </Logo>
+
+        <Bread>
+          <TransitionContainer>
+            {isMounted && (
+              <CSSTransition classNames="fadedown" timeout={3000}>
+                <HamburgerButton
+                  onClick={toggleHamburger}
+                  style={{ transitionDelay: `400ms` }}
+                >
+                  <Hamburger isToggled={isHamburgerCooked} />
+                </HamburgerButton>
+              </CSSTransition>
+            )}
+          </TransitionContainer>
+        </Bread>
 
         <Links>
           <List>
