@@ -43,6 +43,20 @@ module.exports = {
               backgroundColor: "transparent",
             },
           },
+          {
+            resolve: "gatsby-remark-embed-video",
+            options: {
+              ratio: 1.77,
+              related: false,
+              noIframeBorder: true,
+            },
+          },
+          {
+            resolve: `gatsby-remark-responsive-iframe`,
+            options: {
+              wrapperStyle: `margin-bottom: 0`,
+            },
+          },
         ],
       },
     },

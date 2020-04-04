@@ -9,6 +9,7 @@ import Layout from "./layout"
 import Menu from "./menu"
 import Nav from "./nav"
 import Social from "./social"
+import Video from "./video"
 
 export {
   About,
@@ -22,4 +23,5 @@ export {
   Menu,
   Nav,
   Social,
+  Video,
 }

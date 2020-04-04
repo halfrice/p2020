@@ -1,6 +1,7 @@
 import FormattedIcon from "./formattedicon"
 import IconCodepen from "./codepen"
 import IconFacebook from "./facebook"
+import IconFolder from "./folder"
 import IconGithub from "./github"
 import IconGoogle from "./google"
 import IconLinkedin from "./linkedin"
@@ -10,6 +11,7 @@ export {
   FormattedIcon,
   IconCodepen,
   IconFacebook,
+  IconFolder,
   IconGithub,
   IconGoogle,
   IconLinkedin,

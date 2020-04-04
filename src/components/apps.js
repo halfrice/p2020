@@ -1,8 +1,11 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { CSSTransition, TransitionGroup } from "react-transition-group"
+import Img from "gatsby-image"
 import styled from "styled-components"
+import { CSSTransition, TransitionGroup } from "react-transition-group"
+import { Video } from "~components"
 import { device, mixins, Section, theme } from "~styles"
+import { IconFolder } from "~components/icons"
 
 const { color, fontSize } = theme
 const { flex } = mixins
@@ -16,10 +19,11 @@ const AppsContainer = styled(Section)`
 `
 const TransitionContainer = styled(TransitionGroup)`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(22.5rem, 1fr));
-  ${device.desktop`grid-template-columns: repeat(auto-fill, minmax(18.75rem, 1fr));`};
-  ${device.tablet`grid-template-columns: repeat(auto-fill, minmax(15.625rem, 1fr));`};
-  ${device.phone`grid-template-columns: repeat(auto-fill, minmax(12.5rem, 1fr));`};
+  grid-template-columns: repeat(3, 1fr);
+  ${device.desktop`grid-template-columns: repeat(2, 1fr);`};
+  ${device.tablet`grid-template-columns: repeat(2, 1fr);`};
+  ${device.phone`grid-template-columns: repeat(1, 1fr);`};
+  ${device.smallPhone`grid-template-columns: repeat(1, 1fr);`};
   grid-gap: 1rem;
   ${device.tablet`grid-gap: 0.75rem;`};
 `
@@ -40,15 +44,48 @@ const AppInner = styled.div`
   height: 100%;
   background-color: ${color.black};
 `
-
-const ContentContainer = styled.div`
-  padding: 2rem 1.75rem;
-  ${device.tablet`padding: 1.25rem 1rem;`};
+const MediaContainer = styled.div`
+  position: relative;
+  width: 100%;
+  border-radius: 3px;
+`
+const Media = styled.div`
+  svg {
+    fill: ${color.blue};
+    width: 50%;
+    height: 50%;
+  }
+`
+const IconContainer = styled.div`
+  padding-bottom: 56.25%;
+  background-color: ${color.dark};
+  overflow: hidden;
+`
+const Icon = styled.iframe`
+  border: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
 `
+const FolderContainer = styled.div`
+  ${flex.center};
+  align-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: ${color.lightBlack};
+`
+const ContentContainer = styled.div`
+  padding: 1.5rem 1.25rem;
+  ${device.tablet`padding: 1.25rem 1rem;`};
+  width: 100%;
+`
 const AppName = styled.h5`
-  margin-bottom: 1rem;
+  margin: 0 0 1rem;
   color: ${color.blue};
 `
 const AppDescription = styled.div`
@@ -78,7 +115,7 @@ const Apps = ({ data }) => {
         {apps &&
           apps.map(({ node }, i) => {
             const { frontmatter, html } = node
-            const { title, tech } = frontmatter
+            const { image, tech, title, video } = frontmatter
             return (
               <CSSTransition
                 key={i}
@@ -92,6 +129,25 @@ const Apps = ({ data }) => {
                   }}
                 >
                   <AppInner>
+                    <MediaContainer>
+                      <Media>
+                        {video ? (
+                          <Video url={video} title={title} />
+                        ) : image ? (
+                          <Img
+                            fluid={image.childImageSharp.fluid}
+                            objectPosition="50% 50%"
+                          />
+                        ) : (
+                          <IconContainer>
+                            <FolderContainer>
+                              <IconFolder />
+                            </FolderContainer>
+                            <Icon />
+                          </IconContainer>
+                        )}
+                      </Media>
+                    </MediaContainer>
                     <ContentContainer>
                       <AppName>{title}</AppName>
                       <AppDescription

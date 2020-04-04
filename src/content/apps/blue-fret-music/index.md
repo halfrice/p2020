@@ -8,6 +8,7 @@ appleStore: ""
 googlePlay: ""
 tech:
   - Javascript
+  - JQuery
   - HTML
   - CSS
 show: "true"
