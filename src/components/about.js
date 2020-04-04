@@ -7,7 +7,7 @@ import { device, mixins, theme, Section, Title } from "~styles"
 const { color } = theme
 
 const AboutContainer = styled(Section)`
-  max-width: 75rem;
+  max-width: 80rem;
 `
 const FlexContainer = styled.div`
   ${mixins.flex.between};
