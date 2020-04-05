@@ -2,6 +2,7 @@ import About from "./about"
 import Apps from "./apps"
 import Clock from "./clock"
 import Contact from "./contact"
+import Download from "./download"
 import Featured from "./featured"
 import Footer from "./footer"
 import Hamburger from "./hamburger"
@@ -18,6 +19,7 @@ export {
   Apps,
   Clock,
   Contact,
+  Download,
   Featured,
   Footer,
   Hamburger,

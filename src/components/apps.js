@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import Img from "gatsby-image"
 import styled from "styled-components"
 import { CSSTransition, TransitionGroup } from "react-transition-group"
-import { Video, Technology } from "~components"
+import { Download, Video, Technology } from "~components"
 import { device, mixins, Section, theme } from "~styles"
 import { IconFolder } from "~components/icons"
 
@@ -29,19 +29,20 @@ const TransitionContainer = styled(TransitionGroup)`
   grid-gap: 1rem;
   ${device.tablet`grid-gap: 0.75rem;`};
 `
-const App = styled.div``
+const App = styled.div`
+  border-radius: 3px;
+  overflow: hidden;
+`
 const AppInner = styled.div`
   ${flex.between};
   align-items: flex-start;
   flex-direction: column;
-  border-radius: 3px;
   height: 100%;
   background-color: ${color.black};
 `
 const MediaContainer = styled.div`
   position: relative;
   width: 100%;
-  border-radius: 3px;
 `
 const Media = styled.div`
   svg {
@@ -54,14 +55,6 @@ const IconContainer = styled.div`
   padding-bottom: 56.25%;
   background-color: ${color.dark};
   overflow: hidden;
-`
-const Icon = styled.iframe`
-  border: 0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
 `
 const FolderContainer = styled.div`
   ${flex.center};
@@ -83,7 +76,9 @@ const AppName = styled.h5`
   margin: 0 0 1rem;
   color: ${color.blue};
 `
-const AppDescription = styled.div``
+const AppDescription = styled.div`
+  margin-bottom: 1rem;
+`
 const FooterContainer = styled.footer`
   padding: 1.5rem 1.25rem;
   ${device.tablet`padding: 1.25rem 1rem;`};
@@ -99,7 +94,25 @@ const Apps = ({ data }) => {
         {apps &&
           apps.map(({ node }, i) => {
             const { frontmatter, html } = node
-            const { image, tech, title, video } = frontmatter
+            const {
+              appleStore,
+              github,
+              googlePlay,
+              image,
+              tech,
+              title,
+              url,
+              video,
+              youtube,
+            } = frontmatter
+            const links = {
+              url,
+              github,
+              youtube,
+              appleStore,
+              googlePlay,
+            }
+
             return (
               <CSSTransition
                 key={i}
@@ -127,7 +140,6 @@ const Apps = ({ data }) => {
                             <FolderContainer>
                               <IconFolder />
                             </FolderContainer>
-                            <Icon />
                           </IconContainer>
                         )}
                       </Media>
@@ -137,6 +149,7 @@ const Apps = ({ data }) => {
                       <AppDescription
                         dangerouslySetInnerHTML={{ __html: html }}
                       />
+                      <Download links={links} />
                     </ContentContainer>
                     <FooterContainer>
                       {tech && <Technology tech={tech} />}

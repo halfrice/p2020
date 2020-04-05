@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import Img from "gatsby-image"
 import styled from "styled-components"
-import { Video, Technology } from "~components"
+import { Download, Technology, Video } from "~components"
 import { device, mixins, theme, Section, Title } from "~styles"
 
 const { flex } = mixins
@@ -20,8 +20,10 @@ const FeaturedInner = styled.div`
   margin: 0 auto;
 `
 const AppContainer = styled.div`
-  width: 100%;
+  border-radius: 3px;
   margin-bottom: 1rem;
+  width: 100%;
+  overflow: hidden;
 `
 const App = styled.div`
   align-items: flex-start;
@@ -63,7 +65,24 @@ const Featured = ({ data }) => {
         {apps &&
           apps.map(({ node }, i) => {
             const { frontmatter, html } = node
-            const { image, tech, title, video } = frontmatter
+            const {
+              appleStore,
+              github,
+              googlePlay,
+              image,
+              tech,
+              title,
+              url,
+              video,
+              youtube,
+            } = frontmatter
+            const links = {
+              url,
+              github,
+              youtube,
+              appleStore,
+              googlePlay,
+            }
 
             return (
               <AppContainer key={i}>
@@ -77,6 +96,7 @@ const Featured = ({ data }) => {
                   </MediaContainer>
                   <ContentContainer>
                     <AppName>{title}</AppName>
+                    <Download links={links} />
                     <AppDescription
                       dangerouslySetInnerHTML={{ __html: html }}
                     />
