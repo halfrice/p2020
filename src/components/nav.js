@@ -4,6 +4,7 @@ import { CSSTransition, TransitionGroup } from "react-transition-group"
 import AnchorLink from "react-anchor-link-smooth-scroll"
 import styled from "styled-components"
 import { Hamburger, Menu } from "~components"
+import { IconLogo } from "~components/icons"
 import { navLinks } from "~config"
 import { Button, device, Main, mixins, theme } from "~styles"
 import { throttle, useEventListener } from "~utils"
@@ -39,11 +40,33 @@ const NavInner = styled.nav`
 const TransitionContainer = styled(TransitionGroup)`
   height: 100%;
 `
-const Logo = styled.div`
-  ${flex.center};
-`
+const LogoContainer = styled.div``
 const LogoButton = styled(Button)`
+  ${flex.center};
   margin-left: -0.75rem;
+`
+const Logo = styled.div`
+  width: 2rem;
+  height: 2rem;
+  svg {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    fill: none;
+    user-select: none;
+    transition: ${theme.shortTransition};
+    #circle {
+      stroke: ${color.lightGreen};
+    }
+    #n {
+      stroke: ${color.lightGreen};
+    }
+    &:focus,
+    &:hover {
+      opacity: 0.5;
+    }
+  }
 `
 const Bread = styled.div`
   display: none;
@@ -147,7 +170,7 @@ const Nav = () => {
   return (
     <NavContainer scrollDirection={scrollDirection}>
       <NavInner>
-        <Logo>
+        <LogoContainer>
           <TransitionContainer>
             {isMounted && (
               <CSSTransition classNames="fadedown" timeout={3000}>
@@ -157,13 +180,15 @@ const Nav = () => {
                     onClick={isHamburgerCooked ? toggleHamburger : null}
                     style={{ transitionDelay: `100ms` }}
                   >
-                    P2020
+                    <Logo>
+                      <IconLogo />
+                    </Logo>
                   </Link>
                 </LogoButton>
               </CSSTransition>
             )}
           </TransitionContainer>
-        </Logo>
+        </LogoContainer>
 
         <Bread>
           <TransitionContainer>

@@ -8,6 +8,7 @@ import IconGoogle from "./google"
 import IconGooglePlay from "./googlePlay"
 import IconLink from "./link"
 import IconLinkedin from "./linkedin"
+import IconLogo from "./logo"
 import IconTwitter from "./twitter"
 import IconYoutube from "./youtube"
 
@@ -22,6 +23,7 @@ export {
   IconGooglePlay,
   IconLink,
   IconLinkedin,
+  IconLogo,
   IconTwitter,
   IconYoutube,
 }
