@@ -1,8 +1,10 @@
-import React from "react"
+import React, { useEffect, useRef } from "react"
 import { socialMedia } from "~config"
 import { FormattedIcon } from "~components/icons"
 import styled from "styled-components"
 import { device, mixins, theme } from "~styles"
+import { scrollreveal } from "~utils"
+import { scrollrevealConfig } from "~config"
 
 const { color } = theme
 const { flex } = mixins
@@ -49,8 +51,14 @@ const Username = styled.div`
 `
 
 const Social = () => {
+  const revealContainer = useRef(null)
+
+  useEffect(() => {
+    scrollreveal.reveal(revealContainer.current, scrollrevealConfig())
+  }, [])
+
   return (
-    <SocialContainer>
+    <SocialContainer ref={revealContainer}>
       <Grid>
         {socialMedia &&
           socialMedia.map(({ name, url, color, username }, i) => (

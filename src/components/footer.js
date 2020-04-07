@@ -23,7 +23,7 @@ const FooterInner = styled.div`
   ${device.tablet`padding: 3rem 0;`};
   ${device.phone`padding: 1.5rem 0;`};
   width: 100%;
-  max-width: 80rem;
+  max-width: 64rem;
   height: 100px;
   ${device.tablet`height: auto;`};
 `

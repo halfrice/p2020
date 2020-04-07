@@ -33,7 +33,7 @@ const NavInner = styled.nav`
   ${flex.between};
   align-items: center;
   width: 100%;
-  max-width: 80rem;
+  max-width: 64rem;
   height: 100%;
   overflow: visible;
 `

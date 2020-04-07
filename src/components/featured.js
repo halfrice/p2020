@@ -1,9 +1,11 @@
-import React from "react"
+import React, { useEffect, useRef } from "react"
 import PropTypes from "prop-types"
 import Img from "gatsby-image"
 import styled from "styled-components"
 import { Download, Technology, Video } from "~components"
 import { device, mixins, theme, Section, Title } from "~styles"
+import { scrollreveal } from "~utils"
+import { scrollrevealConfig } from "~config"
 
 const { flex } = mixins
 const { color } = theme
@@ -11,7 +13,7 @@ const { color } = theme
 const FeaturedContainer = styled(Section)`
   padding-bottom: 0;
   ${device.tablet`padding-bottom: 0;`};
-  max-width: 56rem;
+  max-width: 48rem;
 `
 const FeaturedInner = styled.div`
   ${flex.between};
@@ -57,9 +59,23 @@ const FooterContainer = styled.footer`
 const Featured = ({ data }) => {
   const apps = data
 
+  const revealContainer = useRef(null)
+  useEffect(
+    () => scrollreveal.reveal(revealContainer.current, scrollrevealConfig()),
+    []
+  )
+  const revealTitle = useRef(null)
+  const revealApps = useRef([])
+  useEffect(() => {
+    scrollreveal.reveal(revealTitle.current, scrollrevealConfig(200))
+    revealApps.current.forEach((ref, i) => {
+      scrollreveal.reveal(ref, scrollrevealConfig((i + 3) * 100))
+    })
+  }, [])
+
   return (
     <FeaturedContainer id="apps">
-      <Title>Apps</Title>
+      <Title ref={revealTitle}>Apps</Title>
 
       <FeaturedInner>
         {apps &&
@@ -85,7 +101,7 @@ const Featured = ({ data }) => {
             }
 
             return (
-              <AppContainer key={i}>
+              <AppContainer key={i} ref={app => (revealApps.current[i] = app)}>
                 <App>
                   <MediaContainer>
                     {video ? (

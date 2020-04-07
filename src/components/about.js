@@ -1,13 +1,15 @@
-import React from "react"
+import React, { useEffect, useRef } from "react"
 import PropTypes from "prop-types"
 import Img from "gatsby-image"
 import styled from "styled-components"
 import { device, mixins, theme, Section, Title } from "~styles"
+import { scrollreveal } from "~utils"
+import { scrollrevealConfig } from "~config"
 
 const { color } = theme
 
 const AboutContainer = styled(Section)`
-  max-width: 80rem;
+  max-width: 64rem;
 `
 const FlexContainer = styled.div`
   ${mixins.flex.between};
@@ -15,8 +17,7 @@ const FlexContainer = styled.div`
   ${device.tablet`flex-direction: column-reverse;`};
 `
 const ContentContainer = styled.div`
-  width: 55%;
-  max-width: 48rem;
+  width: 50%;
   ${device.tablet`width: 100%;`};
 `
 const Content = styled.div`
@@ -26,7 +27,7 @@ const ImageContainer = styled.div`
   background: transparent;
   border: 1px solid transparent;
   border-radius: 3px;
-  width: 45%;
+  width: 50%;
   ${device.tablet`width: 100%;`};
   ${device.tablet`margin-bottom: 1rem`};
   transition: ${theme.transition};
@@ -55,10 +56,17 @@ const About = ({ data }) => {
   const { frontmatter, html } = data
   const { image, title } = frontmatter
 
+  const revealTitle = useRef(null)
+  const revealContent = useRef(null)
+  useEffect(() => {
+    scrollreveal.reveal(revealTitle.current, scrollrevealConfig(200))
+    scrollreveal.reveal(revealContent.current, scrollrevealConfig(300))
+  }, [])
+
   return (
     <AboutContainer id="about">
-      <Title>{title}</Title>
-      <FlexContainer>
+      <Title ref={revealTitle}>{title}</Title>
+      <FlexContainer ref={revealContent}>
         <ContentContainer>
           <Content dangerouslySetInnerHTML={{ __html: html }} />
         </ContentContainer>

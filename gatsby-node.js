@@ -1,6 +1,19 @@
 const path = require("path")
 
-exports.onCreateWebpackConfig = ({ actions }) => {
+exports.onCreateWebpackConfig = ({ actions, loaders, stage }) => {
+  if (stage === "build-html") {
+    actions.setWebpackConfig({
+      module: {
+        rules: [
+          {
+            test: /scrollreveal/,
+            use: loaders.null(),
+          },
+        ],
+      },
+    })
+  }
+
   actions.setWebpackConfig({
     resolve: {
       alias: {

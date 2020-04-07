@@ -1,10 +1,12 @@
-import React from "react"
+import React, { useEffect, useRef } from "react"
 import PropTypes from "prop-types"
 import Img from "gatsby-image"
 import styled from "styled-components"
 import { CSSTransition, TransitionGroup } from "react-transition-group"
 import { Download, Video, Technology } from "~components"
 import { device, mixins, Section, theme } from "~styles"
+import { scrollreveal } from "~utils"
+import { scrollrevealConfig } from "~config"
 import { IconFolder } from "~components/icons"
 
 const { color } = theme
@@ -14,7 +16,7 @@ const AppsContainer = styled(Section)`
   ${flex.center};
   align-items: flex-start;
   flex-direction: column;
-  max-width: 80rem;
+  max-width: 64rem;
   padding-top: 0;
   ${device.tablet`padding-top: 0;`};
   color: ${color.lightSlate};
@@ -88,6 +90,13 @@ const FooterContainer = styled.footer`
 const Apps = ({ data }) => {
   const apps = data.filter(({ node }) => node.frontmatter.show === "true")
 
+  const revealApps = useRef([])
+  useEffect(() => {
+    revealApps.current.forEach((ref, i) =>
+      scrollreveal.reveal(ref, scrollrevealConfig((i + 2) * 100))
+    )
+  }, [])
+
   return (
     <AppsContainer id="apps">
       <TransitionContainer>
@@ -121,8 +130,9 @@ const Apps = ({ data }) => {
                 exit={false}
               >
                 <App
+                  ref={app => (revealApps.current[i] = app)}
                   style={{
-                    transitionDelay: `${i * 100}ms`,
+                    transitionDelay: `${(i + 1) * 100}ms`,
                   }}
                 >
                   <AppInner>
