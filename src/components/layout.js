@@ -1,7 +1,7 @@
-import React from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
 import "normalize.css/normalize.css"
-import { Footer, Nav } from "~components"
+import { Footer, Nav, Splash } from "~components"
 import { Globals } from "~styles"
 
 const LayoutContainer = styled.div`
@@ -13,14 +13,21 @@ const LayoutContainer = styled.div`
 const Display = styled.div``
 
 const Layout = ({ children }) => {
+  const [isLoading, setIsLoading] = useState(true)
+
   return (
-    <LayoutContainer>
+    <LayoutContainer id="layout">
       <Globals />
-      <Display>
-        <Nav />
-        {children}
-        <Footer />
-      </Display>
+
+      {isLoading ? (
+        <Splash finishLoading={() => setIsLoading(false)} />
+      ) : (
+        <Display id="display">
+          <Nav />
+          {children}
+          <Footer />
+        </Display>
+      )}
     </LayoutContainer>
   )
 }

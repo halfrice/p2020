@@ -11,6 +11,7 @@ import Layout from "./layout"
 import Menu from "./menu"
 import Nav from "./nav"
 import Social from "./social"
+import Splash from "./splash"
 import Technology from "./technology"
 import Video from "./video"
 
@@ -28,6 +29,7 @@ export {
   Menu,
   Nav,
   Social,
+  Splash,
   Technology,
   Video,
 }
