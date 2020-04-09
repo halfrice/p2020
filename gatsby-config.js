@@ -5,7 +5,7 @@ module.exports = {
   siteMetadata: {
     title: site.title,
     description: site.description,
-    siteUrl: site.url,
+    url: site.url,
   },
   plugins: [
     {

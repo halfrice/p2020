@@ -10,6 +10,7 @@ import Hero from "./hero"
 import Layout from "./layout"
 import Menu from "./menu"
 import Nav from "./nav"
+import Seo from "./seo"
 import Social from "./social"
 import Splash from "./splash"
 import Technology from "./technology"
@@ -28,6 +29,7 @@ export {
   Layout,
   Menu,
   Nav,
+  Seo,
   Social,
   Splash,
   Technology,

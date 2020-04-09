@@ -1,7 +1,9 @@
 import React, { useState } from "react"
+import PropTypes from "prop-types"
+import { StaticQuery, graphql } from "gatsby"
 import styled from "styled-components"
 import "normalize.css/normalize.css"
-import { Footer, Nav, Splash } from "~components"
+import { Footer, Nav, Seo, Splash } from "~components"
 import { Globals } from "~styles"
 
 const LayoutContainer = styled.div`
@@ -16,20 +18,40 @@ const Layout = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true)
 
   return (
-    <LayoutContainer id="layout">
-      <Globals />
+    <StaticQuery
+      query={graphql`
+        query LayoutQuery {
+          site {
+            siteMetadata {
+              description
+              title
+              url
+            }
+          }
+        }
+      `}
+      render={({ site }) => (
+        <LayoutContainer id="layout">
+          <Seo metadata={site.siteMetadata} />
+          <Globals />
 
-      {isLoading ? (
-        <Splash finishLoading={() => setIsLoading(false)} />
-      ) : (
-        <Display id="display">
-          <Nav />
-          {children}
-          <Footer />
-        </Display>
+          {isLoading ? (
+            <Splash finishLoading={() => setIsLoading(false)} />
+          ) : (
+            <Display id="display">
+              <Nav />
+              {children}
+              <Footer />
+            </Display>
+          )}
+        </LayoutContainer>
       )}
-    </LayoutContainer>
+    />
   )
+}
+
+Layout.propTypes = {
+  children: PropTypes.node.isRequired,
 }
 
 export default Layout
