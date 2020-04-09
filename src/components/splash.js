@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react"
 import PropTypes from "prop-types"
+import { Helmet } from "react-helmet"
 import anime from "animejs"
 import styled from "styled-components"
 import { device, mixins, theme } from "~styles"
@@ -94,6 +95,7 @@ const Splash = ({ finishLoading }) => {
 
   return (
     <SplashContainer className="splash">
+      <Helmet bodyAttributes={{ class: `hidden` }} />
       <LogoContainer isMounted={isMounted}>
         <IconLogo />
       </LogoContainer>

@@ -19,6 +19,18 @@ const Globals = createGlobalStyle`
     color: ${color.light};
     font-family: sans-serif;
     font-weight: 400;
+    &.hidden {
+      overflow: hidden;
+    }
+    &.blur {
+      overflow: hidden;
+      #layout > #display > * {
+        filter: blur(3px) brightness(0.6);
+        transition: ${theme.transition};
+        pointer-events: none;
+        user-select: none;
+      }
+    }
   }
 
   h1,

@@ -7,7 +7,7 @@ const { color, hamburger } = theme
 
 const HamburgerContainer = styled.div`
   width: ${hamburger.width};
-  min-height: 24px;
+  height: ${hamburger.width};
   background-color: transparent;
 `
 const HamburgerBars = styled.div`

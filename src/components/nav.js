@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react"
 import { Link } from "gatsby"
 import { CSSTransition, TransitionGroup } from "react-transition-group"
+import { Helmet } from "react-helmet"
 import AnchorLink from "react-anchor-link-smooth-scroll"
 import styled from "styled-components"
 import { Hamburger, Menu } from "~components"
@@ -28,6 +29,9 @@ const NavContainer = styled(Main)`
   transition: ${theme.transition};
   overflow-x: auto;
   z-index: 20;
+  filter: none !important;
+  pointer-events: auto !important;
+  user-select: auto !important;
 `
 const NavInner = styled.nav`
   ${flex.between};
@@ -44,6 +48,10 @@ const LogoContainer = styled.div``
 const LogoButton = styled(Button)`
   ${flex.center};
   margin-left: -0.75rem;
+  &:focus,
+  &:hover {
+    opacity: 0.5;
+  }
 `
 const Logo = styled.div`
   width: 2rem;
@@ -61,10 +69,6 @@ const Logo = styled.div`
     }
     #n {
       stroke: ${color.lightGreen};
-    }
-    &:focus,
-    &:hover {
-      opacity: 0.5;
     }
   }
 `
@@ -169,6 +173,9 @@ const Nav = () => {
 
   return (
     <NavContainer scrollDirection={scrollDirection}>
+      <Helmet>
+        <body className={isHamburgerCooked ? "blur" : ""} />
+      </Helmet>
       <NavInner>
         <LogoContainer>
           <TransitionContainer>
@@ -213,7 +220,9 @@ const Nav = () => {
                 navLinks.map(({ url, name }, i) => (
                   <CSSTransition key={i} classNames="fadedown" timeout={3000}>
                     <ListItem style={{ transitionDelay: `${(i + 1) * 100}ms` }}>
-                      <NavLink href={url}>{name}</NavLink>
+                      <NavLink href={url} offset={-32}>
+                        {name}
+                      </NavLink>
                     </ListItem>
                   </CSSTransition>
                 ))}

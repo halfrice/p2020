@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import AnchorLink from "react-anchor-link-smooth-scroll"
 import { navLinks } from "~config"
 import styled from "styled-components"
-import { device, Main, mixins, theme } from "~styles"
+import { Button, device, Main, mixins, theme } from "~styles"
 
 const { color, easing, fontSize, time } = theme
 const { flex } = mixins
@@ -19,6 +19,7 @@ const MenuContainer = styled.div`
   outline: 0;
   transition: all ${time.medium} ${easing};
   transform: translateY(${props => (props.isMenuOpen ? 0 : -100)}vh);
+  visibility: ${props => (props.isMenuOpen ? "visible" : "hidden")};
   z-index: -1;
 `
 const DropdownMenu = styled(Main)`
@@ -36,18 +37,24 @@ const LinksList = styled.ol`
   width: 100%;
 `
 const LinksListItem = styled.li`
+  ${flex.end};
+  margin: 0 auto;
   width: 100%;
   height: 3rem;
-  margin: 0 auto;
   font-size: ${fontSize.md};
   font-weight: 600;
   opacity: ${props => (props.isMenuOpen ? 1 : 0)};
   transition: opacity ${time.medium} ${easing} 0.25s;
+  border-bottom: 1px solid ${color.darkGrey};
+`
+const ItemButton = styled(Button)`
+  margin-right: -0.75rem;
+  height: 100%;
 `
 const MenuLink = styled(AnchorLink)`
-  ${flex.end};
-  border-bottom: 1px solid ${color.darkGrey};
-  width: 100%;
+  ${flex.center};
+  margin-right: -0.75rem;
+  padding: 0 0.75rem;
   height: 100%;
   color: ${color.lightSlate};
   text-align: left;
@@ -81,9 +88,11 @@ const Menu = ({ isMenuOpen, toggleMenu, navHeight }) => {
             {navLinks &&
               navLinks.map(({ url, name }, i) => (
                 <LinksListItem key={i} isMenuOpen={isMenuOpen}>
-                  <MenuLink href={url} offset={-30}>
-                    {name}
-                  </MenuLink>
+                  <ItemButton>
+                    <MenuLink href={url} offset={-32}>
+                      {name}
+                    </MenuLink>
+                  </ItemButton>
                 </LinksListItem>
               ))}
           </LinksList>
