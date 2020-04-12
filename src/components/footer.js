@@ -4,13 +4,14 @@ import { Clock } from "~components"
 import { device, Main, mixins, theme } from "~styles"
 import { footerLinks } from "~config"
 
-const { fontSize, color } = theme
+const { font, fontSize, color } = theme
 const { flex } = mixins
 
 const FooterContainer = styled(Main)`
   ${flex.center};
   background-color: ${color.lightBlack};
-  font-size: ${fontSize.xs};
+  font-family: ${font.ubuntuMono};
+  font-size: ${fontSize.xxs};
   ${device.tablet`font-size: ${fontSize.xxs};`};
   color: ${color.slate};
 `
@@ -33,7 +34,9 @@ const LegaleseContainer = styled.div`
   width: 33%;
   ${device.tablet`width: 100%;`};
 `
-const Legalese = styled.div``
+const Legalese = styled.div`
+  color: ${color.darkSlate};
+`
 const Links = styled.div`
   ${flex.center};
   ${device.tablet`${flex.start};`};
@@ -45,12 +48,11 @@ const Link = styled.a`
   ${device.tablet`:first-of-type { margin-left: -0.625rem; }`};
   padding: 0.5rem 0.75rem;
   ${device.tablet`padding: 0.5rem 0.625rem;`}
-  color: ${color.lightGreen};
+  color: ${color.grey};
   transition: ${theme.shortTransition};
   &:active,
   &:hover,
   &:focus {
-    color: ${color.lightGreen};
     opacity: 0.5;
   }
 `
@@ -60,6 +62,7 @@ const ClockContainer = styled.div`
   padding: 0.375rem 0;
   width: 33%;
   ${device.tablet`width: 100%;`};
+  color: ${color.darkSlate};
   text-align: right;
   ${device.phone`text-align: left;`};
 `

@@ -11,7 +11,6 @@ const { color } = theme
 
 const SplashContainer = styled.div`
   ${flex.center};
-  background-color: ${color.lightBlack};
   position: fixed;
   width: 100%;
   height: 100%;

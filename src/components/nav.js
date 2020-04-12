@@ -10,7 +10,7 @@ import { navLinks } from "~config"
 import { Button, device, Main, mixins, theme } from "~styles"
 import { throttle, useEventListener } from "~utils"
 
-const { color, fontSize, nav } = theme
+const { color, font, fontSize, nav } = theme
 const { flex } = mixins
 
 const NavContainer = styled(Main)`
@@ -26,6 +26,9 @@ const NavContainer = styled(Main)`
       : nav.heightMobile};`};
   background-color: ${props =>
     props.scrollDirection === "none" ? "transparent" : color.black};
+  font-family: ${font.ubuntuMono};
+  font-size: ${fontSize.md};
+  font-weight: 600 !important;
   transition: ${theme.transition};
   overflow-x: auto;
   z-index: 20;
@@ -91,11 +94,14 @@ const List = styled.ol`
   }
 `
 const ListItem = styled(Button)`
+  font-weight: 500;
   :last-of-type {
     margin-right: -0.75rem;
   }
 `
-const NavLink = styled(AnchorLink)``
+const NavLink = styled(AnchorLink)`
+  color: ${color.lightSlate};
+`
 
 const Nav = () => {
   const [isMounted, setIsMounted] = useState(false)
@@ -180,12 +186,11 @@ const Nav = () => {
         <LogoContainer>
           <TransitionContainer>
             {isMounted && (
-              <CSSTransition classNames="fadedown" timeout={3000}>
-                <LogoButton>
+              <CSSTransition classNames="fade" timeout={3000}>
+                <LogoButton style={{ transitionDelay: `1200ms` }}>
                   <Link
                     to="/"
                     onClick={isHamburgerCooked ? toggleHamburger : null}
-                    style={{ transitionDelay: `100ms` }}
                   >
                     <Logo>
                       <IconLogo />

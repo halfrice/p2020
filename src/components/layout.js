@@ -6,6 +6,9 @@ import "normalize.css/normalize.css"
 import { Footer, Nav, Seo, Splash } from "~components"
 import { Globals } from "~styles"
 
+import "typeface-ubuntu"
+import "typeface-ubuntu-mono"
+
 const LayoutContainer = styled.div`
   display: grid;
   grid-template-rows: 1fr auto;
@@ -15,7 +18,7 @@ const LayoutContainer = styled.div`
 const Display = styled.div``
 
 const Layout = ({ children }) => {
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
 
   return (
     <StaticQuery

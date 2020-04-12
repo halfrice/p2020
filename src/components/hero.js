@@ -3,17 +3,18 @@ import PropTypes from "prop-types"
 import Img from "gatsby-image"
 import { CSSTransition, TransitionGroup } from "react-transition-group"
 import styled from "styled-components"
-import { mixins, Section, theme } from "~styles"
+import { device, mixins, Section, theme } from "~styles"
 
-const { color, nav } = theme
+const { color, fontSize, nav } = theme
 const { flex } = mixins
 
 const HeroContainer = styled(Section)`
   ${flex.center};
   max-width: 64rem;
-  height: calc(100vh - (${nav.heightPristine}));
-  min-height: 24rem;
-  margin-top: ${nav.heightPristine};
+  /* height: calc(100vh - (${nav.heightPristine})); */
+  /* min-height: 24rem; */
+  min-height: 100vh;
+  /* margin-top: ${nav.heightPristine}; */
 `
 const TransitionContainer = styled(TransitionGroup)`
   width: 100%;
@@ -21,23 +22,54 @@ const TransitionContainer = styled(TransitionGroup)`
 const Avatar = styled(Img)`
   border-radius: 50%;
   border: 1px solid transparent;
-  margin: 0 0 1.5rem 0;
-  width: 7rem;
-  height: 7rem;
+  margin: 0 0 0.5rem 0;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  width: 8rem;
+  ${device.desktop`width: 7.5rem;`};
+  ${device.tablet`width: 6.75rem;`};
+  ${device.phone`width: 6rem;`};
+  height: 8rem;
+  ${device.desktop`height: 7.5rem;`};
+  ${device.tablet`height: 6.75rem;`};
+  ${device.phone`height: 6rem;`};
   overflow: hidden;
 `
 const Name = styled.h1`
-  color: ${color.cyberAqua};
-  margin-top: 0;
+  margin: 0 0 0 -5px;
+  ${device.phone`margin: 0 0 0 -4px;`};
+  padding: 0;
+  font-size: ${fontSize.h1};
+  ${device.desktop`font-size: 2.884rem;`};
+  ${device.tablet`font-size: 2.667rem;`};
+  ${device.phone`font-size: ${fontSize.h2};`};
+  color: ${color.darkerSlate};
 `
 const Title = styled.h2`
-  color: ${color.cyberDarkPurple};
+  margin: 0 0 0.15rem -3px;
+  padding: 0;
+  font-size: ${fontSize.h2};
+  ${device.desktop`font-size: 2.33rem;`};
+  ${device.tablet`font-size: 2.17rem;`};
+  ${device.phone`font-size: ${fontSize.h3};`};
+  color: ${color.darkSlate};
 `
 const Location = styled.h3`
-  color: ${color.cyberGreen};
+  margin: 0 0 0.5rem -2px;
+  padding: 0;
+  font-size: ${fontSize.h3};
+  ${device.desktop`font-size: ${fontSize.xxxl};`};
+  ${device.tablet`font-size: ${fontSize.xxl};`};
+  ${device.phone`font-size: ${fontSize.xl};`};
+  color: ${color.slate};
 `
 const Content = styled.p`
-  color: ${color.retroPink};
+  margin: 0 0 0 -1px;
+  padding: 0;
+  font-size: ${fontSize.md};
+  ${device.tablet`font-size: ${fontSize.sm};`};
+  ${device.phone`font-size: ${fontSize.xs};`};
+  color: ${color.light};
 `
 
 const Hero = ({ data }) => {

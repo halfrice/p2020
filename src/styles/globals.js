@@ -1,7 +1,8 @@
 import { createGlobalStyle } from "styled-components"
+import { device } from "./device"
 import theme from "./theme.yaml"
 
-const { color } = theme
+const { color, font, fontSize } = theme
 
 const Globals = createGlobalStyle`
   html {
@@ -17,7 +18,9 @@ const Globals = createGlobalStyle`
   body {
     background-color: ${color.darker};
     color: ${color.light};
-    font-family: sans-serif;
+    font-family: ${font.ubuntu};
+    font-size: ${fontSize.default};
+    ${device.tablet`font-size: ${fontSize.sm};`};
     font-weight: 400;
     &.hidden {
       overflow: hidden;

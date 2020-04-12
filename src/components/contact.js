@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
 import { Social } from "~components"
-import { device, mixins, Section, theme, Title } from "~styles"
+import { mixins, Section, theme, Title } from "~styles"
 import { scrollreveal } from "~utils"
 import { scrollrevealConfig } from "~config"
 
@@ -14,8 +14,6 @@ const ContactContainer = styled(Section)`
   align-items: flex-start;
   flex-direction: column;
   max-width: 48rem;
-  /* margin-bottom: 6rem; */
-  /* ${device.tablet`margin-bottom: 2rem;`}; */
 `
 const TitleContainer = styled.div`
   ${flex.start};
@@ -26,7 +24,7 @@ const ContentContainer = styled.div`
   margin: 0 auto;
 `
 const Content = styled.div`
-  color: ${color.lightSlate};
+  color: ${color.light};
 `
 
 const Contact = ({ data }) => {
@@ -36,12 +34,10 @@ const Contact = ({ data }) => {
   const revealTitle = useRef(null)
   const revealContent = useRef(null)
   const revealSocial = useRef(null)
-  // const revealContainer = useRef(null)
   useEffect(() => {
-    scrollreveal.reveal(revealTitle.current, scrollrevealConfig())
+    scrollreveal.reveal(revealTitle.current, scrollrevealConfig(200))
     scrollreveal.reveal(revealContent.current, scrollrevealConfig(400))
     scrollreveal.reveal(revealSocial.current, scrollrevealConfig(600))
-    // scrollreveal.reveal(revealContainer.current, scrollrevealConfig())
   }, [])
 
   return (

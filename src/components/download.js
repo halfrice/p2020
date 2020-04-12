@@ -16,7 +16,6 @@ const { color, fontSize } = theme
 const Links = styled.div`
   ${flex.start};
   margin-left: -0.5rem;
-  margin-bottom: 1rem;
 `
 const Link = styled.a`
   padding: 0.25rem 0.5rem;

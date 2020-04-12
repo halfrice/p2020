@@ -21,7 +21,7 @@ const ContentContainer = styled.div`
   ${device.tablet`width: 100%;`};
 `
 const Content = styled.div`
-  color: ${color.lightGreen};
+  color: ${color.light};
 `
 const ImageContainer = styled.div`
   background: transparent;

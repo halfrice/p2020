@@ -9,7 +9,7 @@ import { scrollreveal } from "~utils"
 import { scrollrevealConfig } from "~config"
 import { IconFolder } from "~components/icons"
 
-const { color } = theme
+const { color, fontSize } = theme
 const { flex } = mixins
 
 const AppsContainer = styled(Section)`
@@ -48,9 +48,9 @@ const MediaContainer = styled.div`
 `
 const Media = styled.div`
   svg {
-    fill: ${color.blue};
-    width: 50%;
-    height: 50%;
+    fill: ${color.darkerSlate};
+    width: ${fontSize.h1};
+    height: ${fontSize.h1};
   }
 `
 const IconContainer = styled.div`
@@ -69,21 +69,27 @@ const FolderContainer = styled.div`
   background-color: ${color.lightBlack};
 `
 const ContentContainer = styled.div`
-  padding: 1.5rem 1.25rem;
-  ${device.tablet`padding: 1.25rem 1rem;`};
+  margin: 0;
+  padding: 1.5rem 1.25rem 1rem;
+  ${device.tablet`padding: 1.25rem 1rem 1rem;`};
   width: 100%;
   height: 100%;
 `
 const AppName = styled.h5`
   margin: 0 0 1rem;
-  color: ${color.blue};
+  color: ${color.darkSlate};
+  font-size: ${fontSize.lg};
+  ${device.tablet`font-size: ${fontSize.md};`};
 `
 const AppDescription = styled.div`
   margin-bottom: 1rem;
+  color: ${color.light};
+  font-size: ${fontSize.md};
+  ${device.tablet`font-size: ${fontSize.sm};`};
 `
 const FooterContainer = styled.footer`
-  padding: 1.5rem 1.25rem;
-  ${device.tablet`padding: 1.25rem 1rem;`};
+  padding: 0 1.25rem 1.5rem;
+  ${device.tablet`padding: 0 1rem 1.25rem;`};
   width: 100%;
 `
 

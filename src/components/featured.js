@@ -8,7 +8,7 @@ import { scrollreveal } from "~utils"
 import { scrollrevealConfig } from "~config"
 
 const { flex } = mixins
-const { color } = theme
+const { color, fontSize } = theme
 
 const FeaturedContainer = styled(Section)`
   padding-bottom: 0;
@@ -47,12 +47,19 @@ const ContentContainer = styled.div`
 `
 const AppName = styled.h5`
   margin: 0 0 1rem;
-  color: ${color.blue};
+  color: ${color.darkSlate};
+  font-size: ${fontSize.md};
+  ${device.tablet`font-size: ${fontSize.sm};`}
 `
-const AppDescription = styled.div``
+const AppDescription = styled.div`
+  margin-bottom: 1rem;
+  color: ${color.light};
+  font-size: ${fontSize.md};
+  ${device.tablet`font-size: ${fontSize.sm};`};
+`
 const FooterContainer = styled.footer`
-  padding: 1.5rem 1.25rem;
-  ${device.tablet`padding: 1.25rem 1rem;`};
+  padding: 0 1.25rem 1.5rem;
+  ${device.tablet`padding: 0 1rem 1.25rem;`};
   width: 100%;
 `
 
@@ -112,10 +119,10 @@ const Featured = ({ data }) => {
                   </MediaContainer>
                   <ContentContainer>
                     <AppName>{title}</AppName>
-                    <Download links={links} />
                     <AppDescription
                       dangerouslySetInnerHTML={{ __html: html }}
                     />
+                    <Download links={links} />
                   </ContentContainer>
                   <FooterContainer>
                     {tech && <Technology tech={tech} />}

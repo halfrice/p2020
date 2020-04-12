@@ -1,5 +1,8 @@
 import { css } from "styled-components"
 import device from "./device"
+import theme from "./theme.yaml"
+
+const { color } = theme
 
 const mixins = {
   flex: {
@@ -46,6 +49,19 @@ const mixins = {
       ${device.phone`padding-right: 1.5rem;`};
     `,
   },
+  gradient: css`
+    background: linear-gradient(
+      60deg,
+      ${color.red},
+      ${color.orange},
+      ${color.darkPurple},
+      ${color.red}
+    );
+    background-size: 128rem;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  `,
 }
 
 export default mixins
