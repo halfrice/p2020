@@ -5,16 +5,13 @@ import { CSSTransition, TransitionGroup } from "react-transition-group"
 import styled from "styled-components"
 import { device, mixins, Section, theme } from "~styles"
 
-const { color, fontSize, nav } = theme
+const { color, fontSize } = theme
 const { flex } = mixins
 
 const HeroContainer = styled(Section)`
   ${flex.center};
   max-width: 64rem;
-  /* height: calc(100vh - (${nav.heightPristine})); */
-  /* min-height: 24rem; */
   min-height: 100vh;
-  /* margin-top: ${nav.heightPristine}; */
 `
 const TransitionContainer = styled(TransitionGroup)`
   width: 100%;
@@ -78,7 +75,7 @@ const Hero = ({ data }) => {
   const { frontmatter, html } = data
 
   useEffect(() => {
-    const timeout = setTimeout(() => setIsMounted(true), 500)
+    const timeout = setTimeout(() => setIsMounted(true), 1000)
     return () => clearTimeout(timeout)
   }, [])
 

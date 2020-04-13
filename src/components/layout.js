@@ -41,7 +41,7 @@ const Layout = ({ children }) => {
           {isLoading ? (
             <Splash finishLoading={() => setIsLoading(false)} />
           ) : (
-            <Display id="display">
+            <Display id="display" className="display">
               <Nav />
               {children}
               <Footer />

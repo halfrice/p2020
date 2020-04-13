@@ -7,6 +7,7 @@ const { color, font, fontSize } = theme
 const Globals = createGlobalStyle`
   html {
     box-sizing: border-box;
+    width: 100%;
   }
 
   *,
@@ -16,19 +17,23 @@ const Globals = createGlobalStyle`
   }
 
   body {
+    width: 100%;
+    min-height: 100%;
     background-color: ${color.darker};
     color: ${color.light};
     font-family: ${font.ubuntu};
     font-size: ${fontSize.default};
     ${device.tablet`font-size: ${fontSize.sm};`};
     font-weight: 400;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
     &.hidden {
       overflow: hidden;
     }
     &.blur {
       overflow: hidden;
-      #layout > #display > * {
-        filter: blur(3px) brightness(0.6);
+      #layout > .display > * {
+        filter: blur(5px) brightness(0.7);
         transition: ${theme.transition};
         pointer-events: none;
         user-select: none;

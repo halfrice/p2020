@@ -20,7 +20,7 @@ const HamburgerBars = styled.div`
   &:after {
     content: "";
     display: block;
-    background-color: ${color.lightSlate};
+    background-color: ${color.light};
     position: absolute;
     width: ${hamburger.width};
     height: 2px;

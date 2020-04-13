@@ -29,38 +29,38 @@ const mixins = {
   },
   padding: {
     top: css`
-      padding-top: 9rem;
+      padding-top: 8rem;
       ${device.phone`padding-top: 6rem;`};
     `,
     bottom: css`
-      padding-bottom: 9rem;
+      padding-bottom: 8rem;
       ${device.phone`padding-bottom: 6rem;`};
     `,
     left: css`
-      padding-left: 9rem;
+      padding-left: 8rem;
       ${device.desktop`padding-left: 6rem;`};
       ${device.tablet`padding-left: 3rem;`};
       ${device.phone`padding-left: 1.5rem;`};
     `,
     right: css`
-      padding-right: 9rem;
+      padding-right: 8rem;
       ${device.desktop`padding-right: 6rem;`};
       ${device.tablet`padding-right: 3rem;`};
       ${device.phone`padding-right: 1.5rem;`};
     `,
   },
-  gradient: css`
-    background: linear-gradient(
-      60deg,
-      ${color.red},
-      ${color.orange},
-      ${color.darkPurple},
-      ${color.red}
-    );
-    background-size: 128rem;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  button: css`
+    color: ${color.lightSlate};
+    cursor: pointer;
+    background-color: transparent;
+    border-radius: 3px;
+    padding: 0.5rem 0.75rem;
+    text-decoration: none;
+    transition: none;
+    &:hover,
+    &:active {
+      opacity: 0.5;
+    }
   `,
 }
 

@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet"
 import AnchorLink from "react-anchor-link-smooth-scroll"
 import styled from "styled-components"
 import { Hamburger, Menu } from "~components"
-import { IconLogo } from "~components/icons"
+import { FormattedIcon, IconLogo } from "~components/icons"
 import { navLinks } from "~config"
 import { Button, device, Main, mixins, theme } from "~styles"
 import { throttle, useEventListener } from "~utils"
@@ -30,35 +30,32 @@ const NavContainer = styled(Main)`
   font-size: ${fontSize.md};
   font-weight: 600 !important;
   transition: ${theme.transition};
-  overflow-x: auto;
-  z-index: 20;
   filter: none !important;
   pointer-events: auto !important;
   user-select: auto !important;
+  z-index: 21;
 `
 const NavInner = styled.nav`
   ${flex.between};
-  align-items: center;
+  position: relative;
   width: 100%;
   max-width: 64rem;
   height: 100%;
-  overflow: visible;
+  z-index: 22;
 `
 const TransitionContainer = styled(TransitionGroup)`
   height: 100%;
 `
-const LogoContainer = styled.div``
-const LogoButton = styled(Button)`
+const LogoContainer = styled.div`
   ${flex.center};
+`
+const LogoButton = styled(Button)`
   margin-left: -0.75rem;
-  &:focus,
-  &:hover {
-    opacity: 0.5;
-  }
 `
 const Logo = styled.div`
-  width: 2rem;
-  height: 2rem;
+  width: ${props => (props.isPristine ? "2.5rem" : "2rem")};
+  height: ${props => (props.isPristine ? "2.5rem" : "2rem")};
+  transition: ${theme.transition};
   svg {
     display: block;
     margin: 0 auto;
@@ -81,26 +78,34 @@ const Bread = styled.div`
 `
 const HamburgerButton = styled(Button)`
   margin-right: -0.75rem;
+  &:active,
+  &:hover,
+  &:focus {
+    opacity: 1;
+  }
 `
 const Links = styled.div`
-  ${flex.center};
   ${device.tablet`display: none;`};
-  height: 100%;
-`
-const List = styled.ol`
-  height: 100%;
   div {
     ${flex.between};
   }
 `
-const ListItem = styled(Button)`
+const NavLink = styled(AnchorLink)`
+  ${mixins.button};
+  ${flex.between};
+  color: ${color.lightSlate};
   font-weight: 500;
+  transition: ${theme.shortTransition};
   :last-of-type {
     margin-right: -0.75rem;
   }
-`
-const NavLink = styled(AnchorLink)`
-  color: ${color.lightSlate};
+  svg {
+    width: ${fontSize.lg};
+    height: ${fontSize.lg};
+    fill: ${color.lightGreen};
+    margin-right: 0.375rem;
+    transition: ${theme.shortTransition};
+  }
 `
 
 const Nav = () => {
@@ -109,6 +114,9 @@ const Nav = () => {
   const [isHamburgerCooked, setIsHamburgerCooked] = useState(false)
   const [scrollDirection, setScrollDirection] = useState("none")
   const [prevY, setPrevY] = useState(0)
+
+  const isPristine = scrollDirection === "none"
+  const timeout = isPristine ? 3000 : 0
 
   const toggleHamburger = () => {
     setIsHamburgerCooked(!isHamburgerCooked)
@@ -180,23 +188,20 @@ const Nav = () => {
   return (
     <NavContainer scrollDirection={scrollDirection}>
       <Helmet>
-        <body className={isHamburgerCooked ? "blur" : ""} />
+        <body className={isHamburgerCooked ? "hidden" : ""} />
       </Helmet>
       <NavInner>
         <LogoContainer>
           <TransitionContainer>
             {isMounted && (
-              <CSSTransition classNames="fade" timeout={3000}>
-                <LogoButton style={{ transitionDelay: `1200ms` }}>
-                  <Link
-                    to="/"
-                    onClick={isHamburgerCooked ? toggleHamburger : null}
-                  >
-                    <Logo>
+              <CSSTransition classNames="fade" timeout={timeout}>
+                <Link to="/" style={{ transitionDelay: `0ms` }}>
+                  <LogoButton>
+                    <Logo isToggled={isHamburgerCooked} isPristine={isPristine}>
                       <IconLogo />
                     </Logo>
-                  </Link>
-                </LogoButton>
+                  </LogoButton>
+                </Link>
               </CSSTransition>
             )}
           </TransitionContainer>
@@ -205,10 +210,10 @@ const Nav = () => {
         <Bread>
           <TransitionContainer>
             {isMounted && (
-              <CSSTransition classNames="fadedown" timeout={3000}>
+              <CSSTransition classNames="fade" timeout={timeout}>
                 <HamburgerButton
                   onClick={toggleHamburger}
-                  style={{ transitionDelay: `200ms` }}
+                  style={{ transitionDelay: `100ms` }}
                 >
                   <Hamburger isToggled={isHamburgerCooked} />
                 </HamburgerButton>
@@ -218,28 +223,30 @@ const Nav = () => {
         </Bread>
 
         <Links>
-          <List>
-            <TransitionContainer>
-              {isMounted &&
-                navLinks &&
-                navLinks.map(({ url, name }, i) => (
-                  <CSSTransition key={i} classNames="fadedown" timeout={3000}>
-                    <ListItem style={{ transitionDelay: `${(i + 1) * 100}ms` }}>
-                      <NavLink href={url} offset={-32}>
-                        {name}
-                      </NavLink>
-                    </ListItem>
-                  </CSSTransition>
-                ))}
-            </TransitionContainer>
-          </List>
+          <TransitionContainer>
+            {isMounted &&
+              navLinks &&
+              navLinks.map(({ url, name }, i) => (
+                <CSSTransition key={i} classNames="fadedown" timeout={timeout}>
+                  <NavLink
+                    href={url}
+                    offset={-32}
+                    style={{ transitionDelay: `${(i + 1) * 100}ms` }}
+                  >
+                    <FormattedIcon name={name} />
+                    {name}
+                  </NavLink>
+                </CSSTransition>
+              ))}
+          </TransitionContainer>
         </Links>
       </NavInner>
 
       <Menu
         isMenuOpen={isHamburgerCooked}
-        toggleMenu={toggleHamburger}
+        isPristine={isPristine}
         navHeight={getNavHeight()}
+        toggleMenu={toggleHamburger}
       />
     </NavContainer>
   )

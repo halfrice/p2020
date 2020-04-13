@@ -4,7 +4,7 @@ import styled from "styled-components"
 import { device, mixins, theme } from "~styles"
 
 const { flex } = mixins
-const { color, fontSize } = theme
+const { color, font, fontSize } = theme
 
 const TechnologyContainer = styled.div``
 const List = styled.ul`
@@ -19,8 +19,9 @@ const Item = styled.li`
   margin-left: -6px;
   padding: 0 6px;
   color: ${color.lightGrey};
-  font-size: ${fontSize.xs};
-  ${device.tablet`font-size ${fontSize.xxs};`};
+  font-family: ${font.ubuntuMono};
+  font-size: ${fontSize.xxs};
+  ${device.tablet`font-size ${fontSize.xxxs};`};
   white-space: nowrap;
 `
 

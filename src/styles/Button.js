@@ -11,10 +11,9 @@ const Button = styled.button`
   padding: 0.5rem 0.75rem;
   text-decoration: none;
   transition: none;
-
   &:hover,
-  &:focus {
-    color: ${color.darkSlate};
+  &:active {
+    opacity: 0.5;
   }
 `
 
