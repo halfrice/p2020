@@ -50,7 +50,6 @@ const mixins = {
     `,
   },
   button: css`
-    color: ${color.lightSlate};
     cursor: pointer;
     background-color: transparent;
     border-radius: 3px;
@@ -61,6 +60,14 @@ const mixins = {
     &:active {
       opacity: 0.5;
     }
+  `,
+  boxShadow: css`
+    box-shadow: 0 0.625rem 2rem -1rem ${color.black};
+    transition: ${theme.transition};
+  `,
+  shadow: css`
+    box-shadow: 0 0.625rem 1rem -1rem ${color.black + "88"};
+    transition: ${theme.transition};
   `,
 }
 

@@ -5,6 +5,7 @@ import styled from "styled-components"
 import "normalize.css/normalize.css"
 import { Footer, Nav, Seo, Splash } from "~components"
 import { Globals } from "~styles"
+import { Theme } from "~themes"
 
 import "typeface-ubuntu"
 import "typeface-ubuntu-mono"
@@ -34,20 +35,22 @@ const Layout = ({ children }) => {
         }
       `}
       render={({ site }) => (
-        <LayoutContainer id="layout">
-          <Seo metadata={site.siteMetadata} />
-          <Globals />
+        <Theme>
+          <LayoutContainer id="layout">
+            <Seo metadata={site.siteMetadata} />
+            <Globals />
 
-          {isLoading ? (
-            <Splash finishLoading={() => setIsLoading(false)} />
-          ) : (
-            <Display id="display" className="display">
-              <Nav />
-              {children}
-              <Footer />
-            </Display>
-          )}
-        </LayoutContainer>
+            {isLoading ? (
+              <Splash finishLoading={() => setIsLoading(false)} />
+            ) : (
+              <Display id="display" className="display">
+                <Nav />
+                {children}
+                <Footer />
+              </Display>
+            )}
+          </LayoutContainer>
+        </Theme>
       )}
     />
   )

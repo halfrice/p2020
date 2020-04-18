@@ -19,8 +19,8 @@ const Globals = createGlobalStyle`
   body {
     width: 100%;
     min-height: 100%;
-    background-color: ${color.darker};
-    color: ${color.light};
+    background-color: ${props => props.theme.background.primary};
+    color: ${props => props.theme.text.primary};
     font-family: ${font.ubuntu};
     font-size: ${fontSize.default};
     ${device.tablet`font-size: ${fontSize.sm};`};
@@ -80,6 +80,7 @@ const Globals = createGlobalStyle`
     width: 100%;
     height: 100%;
     vertical-align: middle;
+    pointer-events: none;
   }
 
   .fadeup-enter {

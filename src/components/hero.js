@@ -40,7 +40,7 @@ const Name = styled.h1`
   ${device.desktop`font-size: 2.884rem;`};
   ${device.tablet`font-size: 2.667rem;`};
   ${device.phone`font-size: ${fontSize.h2};`};
-  color: ${color.darkerSlate};
+  color: ${props => props.theme.hero.name};
 `
 const Title = styled.h2`
   margin: 0 0 0.15rem -3px;
@@ -49,7 +49,7 @@ const Title = styled.h2`
   ${device.desktop`font-size: 2.33rem;`};
   ${device.tablet`font-size: 2.17rem;`};
   ${device.phone`font-size: ${fontSize.h3};`};
-  color: ${color.darkSlate};
+  color: ${props => props.theme.hero.title};
 `
 const Location = styled.h3`
   margin: 0 0 0.5rem -2px;
@@ -58,7 +58,7 @@ const Location = styled.h3`
   ${device.desktop`font-size: ${fontSize.xxxl};`};
   ${device.tablet`font-size: ${fontSize.xxl};`};
   ${device.phone`font-size: ${fontSize.xl};`};
-  color: ${color.slate};
+  color: ${props => props.theme.hero.location};
 `
 const Content = styled.p`
   margin: 0 0 0 -1px;
@@ -66,7 +66,7 @@ const Content = styled.p`
   font-size: ${fontSize.md};
   ${device.tablet`font-size: ${fontSize.sm};`};
   ${device.phone`font-size: ${fontSize.xs};`};
-  color: ${color.light};
+  /* color: ${color.light}; */
 `
 
 const Hero = ({ data }) => {

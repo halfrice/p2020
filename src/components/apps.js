@@ -9,7 +9,7 @@ import { scrollreveal } from "~utils"
 import { scrollrevealConfig } from "~config"
 import { IconFolder } from "~components/icons"
 
-const { color, fontSize } = theme
+const { fontSize } = theme
 const { flex } = mixins
 
 const AppsContainer = styled(Section)`
@@ -19,7 +19,6 @@ const AppsContainer = styled(Section)`
   max-width: 64rem;
   padding-top: 0;
   ${device.tablet`padding-top: 0;`};
-  color: ${color.lightSlate};
 `
 const TransitionContainer = styled(TransitionGroup)`
   display: grid;
@@ -28,34 +27,35 @@ const TransitionContainer = styled(TransitionGroup)`
   ${device.tablet`grid-template-columns: repeat(2, 1fr);`};
   ${device.phone`grid-template-columns: repeat(1, 1fr);`};
   ${device.smallPhone`grid-template-columns: repeat(1, 1fr);`};
-  grid-gap: 1rem;
-  ${device.tablet`grid-gap: 0.75rem;`};
+  grid-gap: 2rem 1rem;
+  ${device.tablet`grid-gap: 1.5rem 0.75rem;`};
 `
 const App = styled.div`
   border-radius: 3px;
   overflow: hidden;
+  ${mixins.shadow};
 `
 const AppInner = styled.div`
   ${flex.between};
   align-items: flex-start;
   flex-direction: column;
   height: 100%;
-  background-color: ${color.black};
+  background-color: ${props => props.theme.apps.background};
 `
 const MediaContainer = styled.div`
   position: relative;
   width: 100%;
 `
 const Media = styled.div`
+  background-color: ${props => props.theme.apps.media};
   svg {
-    fill: ${color.darkerSlate};
     width: ${fontSize.h1};
     height: ${fontSize.h1};
+    fill: ${props => props.theme.apps.title};
   }
 `
 const IconContainer = styled.div`
   padding-bottom: 56.25%;
-  background-color: ${color.dark};
   overflow: hidden;
 `
 const FolderContainer = styled.div`
@@ -66,7 +66,6 @@ const FolderContainer = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: ${color.lightBlack};
 `
 const ContentContainer = styled.div`
   margin: 0;
@@ -77,15 +76,15 @@ const ContentContainer = styled.div`
 `
 const AppName = styled.h5`
   margin: 0 0 1rem;
-  color: ${color.darkSlate};
+  color: ${props => props.theme.apps.title};
   font-size: ${fontSize.lg};
   ${device.tablet`font-size: ${fontSize.md};`};
 `
 const AppDescription = styled.div`
   margin-bottom: 1rem;
-  color: ${color.light};
   font-size: ${fontSize.md};
   ${device.tablet`font-size: ${fontSize.sm};`};
+  color: ${props => props.theme.apps.description};
 `
 const FooterContainer = styled.footer`
   padding: 0 1.25rem 1.5rem;

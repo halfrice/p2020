@@ -21,7 +21,7 @@ const ContentContainer = styled.div`
   ${device.tablet`width: 100%;`};
 `
 const Content = styled.div`
-  color: ${color.light};
+  /* color: ${color.light}; */
 `
 const ImageContainer = styled.div`
   background: transparent;
@@ -36,7 +36,8 @@ const AvatarContainer = styled.div`
   border-radius: 3px;
   margin-left: 3em;
   ${device.tablet`margin: 0 auto;`};
-  overflow: hidden;
+  ${mixins.shadow};
+  /* overflow: hidden; */
 `
 const Avatar = styled(Img)`
   background-color: ${color.dark};
@@ -46,10 +47,10 @@ const Avatar = styled(Img)`
   ${device.tablet`height: 15rem`};
   transition: ${theme.transition};
   object-fit: cover;
-  &:hover {
+  /* &:hover {
     transform: scale(1.1);
     ${device.tablet`transform: none`};
-  }
+  } */
 `
 
 const About = ({ data }) => {

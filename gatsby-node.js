@@ -9,6 +9,10 @@ exports.onCreateWebpackConfig = ({ actions, loaders, stage }) => {
             test: /scrollreveal/,
             use: loaders.null(),
           },
+          {
+            test: /animejs/,
+            use: loaders.null(),
+          },
         ],
       },
     })
@@ -21,6 +25,7 @@ exports.onCreateWebpackConfig = ({ actions, loaders, stage }) => {
         "~config": path.resolve(__dirname, "src/config"),
         "~images": path.resolve(__dirname, "src/images"),
         "~styles": path.resolve(__dirname, "src/styles"),
+        "~themes": path.resolve(__dirname, "src/themes"),
         "~utils": path.resolve(__dirname, "src/utils"),
       },
     },

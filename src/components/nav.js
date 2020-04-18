@@ -4,13 +4,13 @@ import { CSSTransition, TransitionGroup } from "react-transition-group"
 import { Helmet } from "react-helmet"
 import AnchorLink from "react-anchor-link-smooth-scroll"
 import styled from "styled-components"
-import { Hamburger, Menu } from "~components"
+import { Hamburger, Menu, Themer } from "~components"
 import { FormattedIcon, IconLogo } from "~components/icons"
 import { navLinks } from "~config"
 import { Button, device, Main, mixins, theme } from "~styles"
 import { throttle, useEventListener } from "~utils"
 
-const { color, font, fontSize, nav } = theme
+const { font, fontSize, nav } = theme
 const { flex } = mixins
 
 const NavContainer = styled(Main)`
@@ -18,14 +18,11 @@ const NavContainer = styled(Main)`
   position: fixed;
   top: 0;
   width: 100%;
-  height: ${props =>
-    props.scrollDirection === "none" ? nav.heightPristine : nav.height};
+  height: ${props => (props.isDirty ? nav.height : nav.heightPristine)};
   ${device.tablet`height: ${props =>
-    props.scrollDirection === "none"
-      ? nav.heightPristine
-      : nav.heightMobile};`};
+    props.isDirty ? nav.heightMobile : nav.heightPristine};`};
   background-color: ${props =>
-    props.scrollDirection === "none" ? "transparent" : color.black};
+    props.isDirty ? props.theme.nav.background : "transparent"};
   font-family: ${font.ubuntuMono};
   font-size: ${fontSize.md};
   font-weight: 600 !important;
@@ -34,6 +31,7 @@ const NavContainer = styled(Main)`
   pointer-events: auto !important;
   user-select: auto !important;
   z-index: 21;
+  ${props => (props.isDirty ? mixins.boxShadow : null)};
 `
 const NavInner = styled.nav`
   ${flex.between};
@@ -63,12 +61,24 @@ const Logo = styled.div`
     height: 100%;
     fill: none;
     user-select: none;
-    transition: ${theme.shortTransition};
+    transition: ${theme.transition};
     #circle {
-      stroke: ${color.lightGreen};
+      stroke: ${props =>
+        props.isDirty
+          ? props.theme.nav.logo.primary
+          : props.isToggled
+          ? props.theme.nav.logo.primary
+          : props.theme.nav.logo.pristine};
+      transition: ${theme.transition};
     }
     #n {
-      stroke: ${color.lightGreen};
+      stroke: ${props =>
+        props.isDirty
+          ? props.theme.nav.logo.primary
+          : props.isToggled
+          ? props.theme.nav.logo.primary
+          : props.theme.nav.logo.pristine};
+      transition: ${theme.transition};
     }
   }
 `
@@ -85,6 +95,7 @@ const HamburgerButton = styled(Button)`
   }
 `
 const Links = styled.div`
+  ${flex.center};
   ${device.tablet`display: none;`};
   div {
     ${flex.between};
@@ -93,19 +104,27 @@ const Links = styled.div`
 const NavLink = styled(AnchorLink)`
   ${mixins.button};
   ${flex.between};
-  color: ${color.lightSlate};
-  font-weight: 500;
   transition: ${theme.shortTransition};
-  :last-of-type {
-    margin-right: -0.75rem;
-  }
+`
+const LinkWrapper = styled.div`
+  color: ${props =>
+    props.isDirty
+      ? props.theme.nav.text.primary
+      : props.theme.nav.text.pristine};
+  font-weight: 600;
   svg {
     width: ${fontSize.lg};
     height: ${fontSize.lg};
-    fill: ${color.lightGreen};
+    fill: ${props =>
+      props.isDirty
+        ? props.theme.nav.icon.primary
+        : props.theme.nav.icon.pristine};
     margin-right: 0.375rem;
     transition: ${theme.shortTransition};
   }
+`
+const ThemerWrapper = styled.div`
+  margin-right: -0.75rem;
 `
 
 const Nav = () => {
@@ -116,6 +135,7 @@ const Nav = () => {
   const [prevY, setPrevY] = useState(0)
 
   const isPristine = scrollDirection === "none"
+  const isDirty = scrollDirection !== "none"
   const timeout = isPristine ? 3000 : 0
 
   const toggleHamburger = () => {
@@ -186,7 +206,7 @@ const Nav = () => {
   useEventListener("resize", handleResize)
 
   return (
-    <NavContainer scrollDirection={scrollDirection}>
+    <NavContainer scrollDirection={scrollDirection} isDirty={isDirty}>
       <Helmet>
         <body className={isHamburgerCooked ? "hidden" : ""} />
       </Helmet>
@@ -197,7 +217,7 @@ const Nav = () => {
               <CSSTransition classNames="fade" timeout={timeout}>
                 <Link to="/" style={{ transitionDelay: `0ms` }}>
                   <LogoButton>
-                    <Logo isToggled={isHamburgerCooked} isPristine={isPristine}>
+                    <Logo isToggled={isHamburgerCooked} isDirty={isDirty}>
                       <IconLogo />
                     </Logo>
                   </LogoButton>
@@ -215,7 +235,7 @@ const Nav = () => {
                   onClick={toggleHamburger}
                   style={{ transitionDelay: `100ms` }}
                 >
-                  <Hamburger isToggled={isHamburgerCooked} />
+                  <Hamburger isToggled={isHamburgerCooked} isDirty={isDirty} />
                 </HamburgerButton>
               </CSSTransition>
             )}
@@ -233,18 +253,27 @@ const Nav = () => {
                     offset={-32}
                     style={{ transitionDelay: `${(i + 1) * 100}ms` }}
                   >
-                    <FormattedIcon name={name} />
-                    {name}
+                    <LinkWrapper isDirty={isDirty}>
+                      <FormattedIcon name={name} />
+                      {name}
+                    </LinkWrapper>
                   </NavLink>
                 </CSSTransition>
               ))}
+            {isMounted && (
+              <CSSTransition classNames="fadedown" timeout={timeout}>
+                <ThemerWrapper style={{ transitionDelay: `400ms` }}>
+                  <Themer isDirty={isDirty} />
+                </ThemerWrapper>
+              </CSSTransition>
+            )}
           </TransitionContainer>
         </Links>
       </NavInner>
 
       <Menu
         isMenuOpen={isHamburgerCooked}
-        isPristine={isPristine}
+        isDirty={isDirty}
         navHeight={getNavHeight()}
         toggleMenu={toggleHamburger}
       />

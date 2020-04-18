@@ -8,7 +8,7 @@ import { scrollreveal } from "~utils"
 import { scrollrevealConfig } from "~config"
 
 const { flex } = mixins
-const { color, fontSize } = theme
+const { fontSize } = theme
 
 const FeaturedContainer = styled(Section)`
   padding-bottom: 0;
@@ -23,16 +23,18 @@ const FeaturedInner = styled.div`
 `
 const AppContainer = styled.div`
   border-radius: 3px;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
+  ${device.tablet`margin-bottom: 1.5rem;`};
   width: 100%;
   overflow: hidden;
+  ${mixins.shadow};
 `
 const App = styled.div`
   align-items: flex-start;
   flex-direction: column;
   border-radius: 3px;
   height: 100%;
-  background-color: ${color.black};
+  background-color: ${props => props.theme.apps.background};
 `
 const MediaContainer = styled.div`
   position: relative;
@@ -47,15 +49,15 @@ const ContentContainer = styled.div`
 `
 const AppName = styled.h5`
   margin: 0 0 1rem;
-  color: ${color.darkSlate};
+  color: ${props => props.theme.apps.title};
   font-size: ${fontSize.md};
   ${device.tablet`font-size: ${fontSize.sm};`}
 `
 const AppDescription = styled.div`
   margin-bottom: 1rem;
-  color: ${color.light};
   font-size: ${fontSize.md};
   ${device.tablet`font-size: ${fontSize.sm};`};
+  color: ${props => props.theme.apps.description};
 `
 const FooterContainer = styled.footer`
   padding: 0 1.25rem 1.5rem;

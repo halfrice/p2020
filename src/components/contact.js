@@ -2,11 +2,10 @@ import React, { useEffect, useRef } from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
 import { Social } from "~components"
-import { mixins, Section, theme, Title } from "~styles"
+import { mixins, Section, Title } from "~styles"
 import { scrollreveal } from "~utils"
 import { scrollrevealConfig } from "~config"
 
-const { color } = theme
 const { flex } = mixins
 
 const ContactContainer = styled(Section)`
@@ -23,9 +22,7 @@ const ContentContainer = styled.div`
   width: 100%;
   margin: 0 auto;
 `
-const Content = styled.div`
-  color: ${color.light};
-`
+const Content = styled.div``
 
 const Contact = ({ data }) => {
   const { frontmatter, html } = data

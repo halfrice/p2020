@@ -14,6 +14,7 @@ import Seo from "./seo"
 import Social from "./social"
 import Splash from "./splash"
 import Technology from "./technology"
+import Themer from "./themer"
 import Video from "./video"
 
 export {
@@ -33,5 +34,6 @@ export {
   Social,
   Splash,
   Technology,
+  Themer,
   Video,
 }

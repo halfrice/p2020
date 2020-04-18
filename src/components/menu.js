@@ -3,6 +3,7 @@ import PropTypes from "prop-types"
 import AnchorLink from "react-anchor-link-smooth-scroll"
 import { navLinks } from "~config"
 import styled from "styled-components"
+import { Themer } from "~components"
 import { FormattedIcon } from "~components/icons"
 import { device, Main, mixins, theme } from "~styles"
 
@@ -24,6 +25,7 @@ const MenuContainer = styled.div`
   transform: translateY(${props => (props.isMenuOpen ? 0 : -100)}vh);
   visibility: ${props => (props.isMenuOpen ? "visible" : "hidden")};
   z-index: 20;
+  overflow-y: scroll;
 `
 const DropdownMenu = styled(Main)`
   ${flex.center};
@@ -33,7 +35,7 @@ const DropdownMenu = styled(Main)`
 const Links = styled.nav`
   width: 100%;
   margin-top: ${props =>
-    props.isPristine ? props.navHeight + "px" : props.navHeight + 24 + "px"};
+    props.isDirty ? props.navHeight + 24 + "px" : props.navHeight + "px"};
   margin-bottom: ${props => (props.isPristine ? "1.5rem" : "1rem")};
   transition: margin ${time.medium} ${easing};
 `
@@ -56,15 +58,20 @@ const MenuLink = styled(AnchorLink)`
   ${flex.center};
   margin-right: -0.75rem;
   transition: ${theme.shortTransition};
+  color: ${props => props.theme.nav.text.primary};
   svg {
     width: ${fontSize.lg};
     height: ${fontSize.lg};
-    fill: ${color.lightGreen};
+    fill: ${props => props.theme.nav.icon.primary};
     margin-right: 0.375rem;
+    z-index: 20;
   }
 `
+const ThemerItem = styled(LinksListItem)`
+  margin-right: -0.75rem;
+`
 
-const Menu = ({ isMenuOpen, isPristine, toggleMenu, navHeight }) => {
+const Menu = ({ isMenuOpen, isDirty, toggleMenu, navHeight }) => {
   const handleMenuClick = e => {
     const target = e.target
     const isLink = target.hasAttribute("href") || target.hasAttribute("to")
@@ -85,7 +92,7 @@ const Menu = ({ isMenuOpen, isPristine, toggleMenu, navHeight }) => {
       tabIndex={isMenuOpen ? 1 : -1}
     >
       <DropdownMenu>
-        <Links navHeight={navHeight} isPristine={isPristine}>
+        <Links navHeight={navHeight} isDirty={isDirty}>
           <LinksList>
             {navLinks &&
               navLinks.map(({ url, name }, i) => (
@@ -96,6 +103,9 @@ const Menu = ({ isMenuOpen, isPristine, toggleMenu, navHeight }) => {
                   </MenuLink>
                 </LinksListItem>
               ))}
+            <ThemerItem isMenuOpen={isMenuOpen}>
+              <Themer isDirty={isDirty} isMobile={isMenuOpen} />
+            </ThemerItem>
           </LinksList>
         </Links>
       </DropdownMenu>
@@ -105,7 +115,7 @@ const Menu = ({ isMenuOpen, isPristine, toggleMenu, navHeight }) => {
 
 Menu.propTypes = {
   isMenuOpen: PropTypes.bool.isRequired,
-  isPristine: PropTypes.bool.isRequired,
+  isDirty: PropTypes.bool.isRequired,
   navHeight: PropTypes.number.isRequired,
   toggleMenu: PropTypes.func.isRequired,
 }

@@ -8,7 +8,9 @@ import {
   IconGithub,
   IconGoogle,
   IconLinkedin,
+  IconMoon,
   IconSmartphone,
+  IconSun,
   IconTwitter,
 } from "~components/icons"
 
@@ -21,6 +23,11 @@ const FormattedIcon = ({ name }) => {
       return <IconSmartphone />
     case "Contact":
       return <IconContact />
+
+    case "Moon":
+      return <IconMoon />
+    case "Sun":
+      return <IconSun />
 
     // social links
     case "Codepen":

@@ -7,7 +7,6 @@ import { device, mixins, theme } from "~styles"
 import { IconLogo } from "~components/icons"
 
 const { flex } = mixins
-const { color } = theme
 
 const SplashContainer = styled.div`
   ${flex.center};
@@ -36,11 +35,11 @@ const LogoContainer = styled.div`
     user-select: none;
     #circle {
       opacity: 0;
-      stroke: ${color.lightGreen};
+      stroke: ${props => props.theme.nav.logo.primary};
     }
     #n {
       opacity: 0;
-      stroke: ${color.lightGreen};
+      stroke: ${props => props.theme.nav.logo.primary};
     }
   }
 `

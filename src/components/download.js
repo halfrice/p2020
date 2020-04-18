@@ -43,7 +43,7 @@ const Download = ({ links }) => {
           target="_blank"
           rel="nofollow noopener noreferrer"
           aria-label="Apple Store Link"
-          style={{ fill: color.lightSlate }}
+          style={{ fill: color.darkerSlate }}
         >
           <IconApple />
         </Link>

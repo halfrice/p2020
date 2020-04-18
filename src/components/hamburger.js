@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import styled from "styled-components"
 import { theme } from "~styles"
 
-const { color, hamburger } = theme
+const { hamburger } = theme
 
 const HamburgerContainer = styled.div`
   width: ${hamburger.width};
@@ -20,7 +20,12 @@ const HamburgerBars = styled.div`
   &:after {
     content: "";
     display: block;
-    background-color: ${color.light};
+    background-color: ${props =>
+      props.isDirty
+        ? props.theme.nav.text.primary
+        : props.isToggled
+        ? props.theme.nav.text.primary
+        : props.theme.nav.text.pristine};
     position: absolute;
     width: ${hamburger.width};
     height: 2px;
@@ -40,15 +45,16 @@ const HamburgerBars = styled.div`
 `
 
 const Hamburger = props => {
-  const { isToggled } = props
+  const { isDirty, isToggled } = props
   return (
     <HamburgerContainer>
-      <HamburgerBars isToggled={isToggled} />
+      <HamburgerBars isToggled={isToggled} isDirty={isDirty} />
     </HamburgerContainer>
   )
 }
 
 Hamburger.propTypes = {
+  isDirty: PropTypes.bool,
   isToggled: PropTypes.bool.isRequired,
 }
 

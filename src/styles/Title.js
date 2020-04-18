@@ -1,11 +1,10 @@
 import styled from "styled-components"
-import theme from "./theme.yaml"
-import { device } from "~styles"
+import { device, theme } from "~styles"
 
-const { color, fontSize } = theme
+const { fontSize } = theme
 
 const Title = styled.h2`
-  color: ${color.lightGreen};
+  color: ${props => props.theme.title.primary};
   font-size: ${fontSize.h3};
   ${device.tablet`font-size: ${fontSize.xxxl};`};
   ${device.phone`font-size: ${fontSize.xxl};`};

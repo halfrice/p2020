@@ -11,7 +11,9 @@ import IconGooglePlay from "./googlePlay"
 import IconLink from "./link"
 import IconLinkedin from "./linkedin"
 import IconLogo from "./logo"
+import IconMoon from "./moon"
 import IconSmartphone from "./smartphone"
+import IconSun from "./sun"
 import IconTwitter from "./twitter"
 import IconYoutube from "./youtube"
 
@@ -29,7 +31,9 @@ export {
   IconLink,
   IconLinkedin,
   IconLogo,
+  IconMoon,
   IconSmartphone,
+  IconSun,
   IconTwitter,
   IconYoutube,
 }
