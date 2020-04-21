@@ -30,7 +30,7 @@ const light = {
   },
   apps: {
     background: color.light,
-    media: color.lighter,
+    media: color.white,
     title: color.darkerSlate,
     description: color.darkerestSlate,
     technology: color.darkSlate,

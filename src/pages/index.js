@@ -8,11 +8,11 @@ const IndexPage = ({ data }) => {
   return (
     <Layout>
       <Main>
-        <Hero data={data.hero.edges[0].node} />
-        <About data={data.about.edges[0].node} />
+        <Hero data={data.hero.edges} />
+        <About data={data.about.edges} />
         <Featured data={data.featured.edges} />
         <Apps data={data.apps.edges} />
-        <Contact data={data.contact.edges[0].node} />
+        <Contact data={data.contact.edges} />
       </Main>
     </Layout>
   )
@@ -32,7 +32,7 @@ export const indexPageQuery = graphql`
           frontmatter {
             avatar {
               childImageSharp {
-                fluid(maxWidth: 360, quality: 90) {
+                fluid(maxWidth: 360, maxHeight: 360, quality: 90) {
                   ...GatsbyImageSharpFluid_withWebp_tracedSVG
                 }
               }
@@ -53,7 +53,7 @@ export const indexPageQuery = graphql`
           frontmatter {
             image {
               childImageSharp {
-                fluid(maxWidth: 900, quality: 90) {
+                fluid(maxWidth: 900, maxHeight: 506, quality: 90) {
                   ...GatsbyImageSharpFluid_withWebp_tracedSVG
                 }
               }
@@ -77,7 +77,7 @@ export const indexPageQuery = graphql`
             googlePlay
             image {
               childImageSharp {
-                fluid(maxWidth: 1080, quality: 90) {
+                fluid(maxWidth: 1080, maxHeight: 506, quality: 90) {
                   ...GatsbyImageSharpFluid_withWebp_tracedSVG
                 }
               }
@@ -105,7 +105,7 @@ export const indexPageQuery = graphql`
             googlePlay
             image {
               childImageSharp {
-                fluid(maxWidth: 640, quality: 90) {
+                fluid(maxWidth: 640, maxHeight: 360, quality: 90) {
                   ...GatsbyImageSharpFluid_withWebp_tracedSVG
                 }
               }

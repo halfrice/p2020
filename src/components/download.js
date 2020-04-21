@@ -22,13 +22,14 @@ const Link = styled.a`
   &:last-of-type {
     margin-right: 0;
   }
+  &:focus,
+  &:active,
+  &:hover {
+    opacity: 0.5;
+  }
   svg {
     width: ${fontSize.xxl};
     height: ${fontSize.xxl};
-    &:focus,
-    &:hover {
-      opacity: 0.5;
-    }
   }
 `
 

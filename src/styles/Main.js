@@ -6,8 +6,8 @@ const { padding } = mixins
 const Main = styled.main`
   ${padding.left};
   ${padding.right};
-  /* margin: 0 auto; */
-  /* width: 100%; */
+  margin: 0 auto;
+  width: 100%;
 `
 
 export default Main

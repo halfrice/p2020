@@ -9,14 +9,14 @@ const dark = {
     primary: color.darker,
   },
   text: {
-    primary: color.lightSlate,
+    primary: color.light,
   },
   title: {
-    primary: color.darkerSlate,
+    primary: color.darkSlate,
   },
   nav: {
     background: color.black + "EE",
-    text: { primary: color.slate, pristine: color.lightSlate },
+    text: { primary: color.darkSlate, pristine: color.slate },
     icon: { primary: color.darkestSlate, pristine: color.darkerSlate },
     logo: { primary: color.darkestSlate, pristine: color.darkerSlate },
   },
@@ -33,7 +33,7 @@ const dark = {
     media: color.dark,
     title: color.darkerSlate,
     description: color.lightSlate,
-    technology: color.darkestSlate,
+    technology: color.darkerSlate,
   },
   footer: {
     text: color.slate,

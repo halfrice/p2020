@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components"
 import { device } from "./device"
-import theme from "./theme.yaml"
+import theme from "./theme.yml"
 
 const { color, font, fontSize } = theme
 
@@ -56,6 +56,7 @@ const Globals = createGlobalStyle`
     display: inline-block;
     position: relative;
     text-decoration: none;
+    outline: none;
   }
 
   p {

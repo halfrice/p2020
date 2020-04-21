@@ -12,6 +12,7 @@ const ThemerContainer = styled.div`
   z-index: 21;
 `
 const ThemerButton = styled(Button)`
+  margin-right: ${props => (props.isMobile ? `-0.75rem` : null)};
   z-index: 22;
   color: ${props =>
     props.isDirty
@@ -45,9 +46,9 @@ const Themer = ({ isDirty, isMobile }) => {
         onClick={context.toggleTheme}
         isDirty={isDirty}
         isMobile={isMobile}
+        aria-label="Theme"
       >
         <FormattedIcon name={context.theme.icon} />
-        {/* <IconContainer>{context.theme.icon}</IconContainer> */}
       </ThemerButton>
     </ThemerContainer>
   )

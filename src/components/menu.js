@@ -5,14 +5,13 @@ import { navLinks } from "~config"
 import styled from "styled-components"
 import { Themer } from "~components"
 import { FormattedIcon } from "~components/icons"
-import { device, Main, mixins, theme } from "~styles"
+import { Button, Main, mixins, theme } from "~styles"
 
 const { color, easing, fontSize, time } = theme
 const { flex } = mixins
 
 const MenuContainer = styled.div`
-  display: none;
-  ${device.tablet`display: block;`};
+  display: block;
   position: fixed;
   top: 0;
   bottom: 0;
@@ -20,7 +19,7 @@ const MenuContainer = styled.div`
   right: 0;
   width: 100%;
   height: 100vh;
-  outline: 0;
+  outline: none;
   transition: all ${time.medium} ${easing};
   transform: translateY(${props => (props.isMenuOpen ? 0 : -100)}vh);
   visibility: ${props => (props.isMenuOpen ? "visible" : "hidden")};
@@ -54,11 +53,15 @@ const LinksListItem = styled.li`
   border-top: 1px solid ${color.darkGrey};
 `
 const MenuLink = styled(AnchorLink)`
-  ${mixins.button};
   ${flex.center};
+  /* ${mixins.button}; */
+
+`
+const MenuLinkButton = styled(Button)`
   margin-right: -0.75rem;
   transition: ${theme.shortTransition};
   color: ${props => props.theme.nav.text.primary};
+  pointer-events: none;
   svg {
     width: ${fontSize.lg};
     height: ${fontSize.lg};
@@ -67,8 +70,8 @@ const MenuLink = styled(AnchorLink)`
     z-index: 20;
   }
 `
-const ThemerItem = styled(LinksListItem)`
-  margin-right: -0.75rem;
+const ThemerRow = styled.div`
+  width: 100%;
 `
 
 const Menu = ({ isMenuOpen, isDirty, toggleMenu, navHeight }) => {
@@ -77,6 +80,9 @@ const Menu = ({ isMenuOpen, isDirty, toggleMenu, navHeight }) => {
     const isLink = target.hasAttribute("href") || target.hasAttribute("to")
     const isNotMenu =
       target.classList && target.classList[0].includes("MenuContainer")
+
+    console.log("isLink:", isLink, " isNotMenu:", isNotMenu)
+    console.log(e.target)
 
     if (isLink || isNotMenu) {
       toggleMenu()
@@ -97,15 +103,19 @@ const Menu = ({ isMenuOpen, isDirty, toggleMenu, navHeight }) => {
             {navLinks &&
               navLinks.map(({ url, name }, i) => (
                 <LinksListItem key={i} isMenuOpen={isMenuOpen}>
-                  <MenuLink href={url} offset={-32}>
-                    <FormattedIcon name={name} />
-                    {name}
+                  <MenuLink href={url} offset={-32} tabIndex={-1}>
+                    <MenuLinkButton>
+                      <FormattedIcon name={name} />
+                      {name}
+                    </MenuLinkButton>
                   </MenuLink>
                 </LinksListItem>
               ))}
-            <ThemerItem isMenuOpen={isMenuOpen}>
-              <Themer isDirty={isDirty} isMobile={isMenuOpen} />
-            </ThemerItem>
+            <ThemerRow>
+              <LinksListItem isMenuOpen={isMenuOpen}>
+                <Themer isDirty={isDirty} isMobile={isMenuOpen} />
+              </LinksListItem>
+            </ThemerRow>
           </LinksList>
         </Links>
       </DropdownMenu>

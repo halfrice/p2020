@@ -1,6 +1,12 @@
 import { useEffect, useRef } from "react"
 
-const useEventListener = (eventName, handler, element = window) => {
+const isSSR = typeof window === "undefined"
+
+const useEventListener = (
+  eventName,
+  handler,
+  element = isSSR ? null : window
+) => {
   const savedHandler = useRef()
 
   useEffect(() => {

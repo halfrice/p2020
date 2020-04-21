@@ -48,9 +48,9 @@ const Link = styled.a`
   ${device.tablet`padding: 0.5rem 0.625rem;`}
   color: ${props => props.theme.footer.links};
   transition: ${theme.shortTransition};
-  &:active,
   &:hover,
-  &:focus {
+  &:focus,
+  &:active {
     opacity: 0.5;
   }
 `

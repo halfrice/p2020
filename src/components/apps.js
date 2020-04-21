@@ -103,7 +103,7 @@ const Apps = ({ data }) => {
   }, [])
 
   return (
-    <AppsContainer id="apps">
+    <AppsContainer>
       <TransitionContainer>
         {apps &&
           apps.map(({ node }, i) => {

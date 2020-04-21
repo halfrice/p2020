@@ -26,9 +26,9 @@ const Link = styled.a`
   padding: 0.5rem 0.75rem;
   min-height: 3rem;
   transition: ${theme.shortTransition};
-  &:active,
   &:hover,
-  &:focus {
+  &:focus,
+  &:active {
     opacity: 0.5;
   }
   svg {

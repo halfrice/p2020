@@ -30,6 +30,7 @@ const NavContainer = styled(Main)`
   filter: none !important;
   pointer-events: auto !important;
   user-select: auto !important;
+  overflow-y: hidden;
   z-index: 21;
   ${props => (props.isDirty ? mixins.boxShadow : null)};
 `
@@ -51,9 +52,10 @@ const LogoButton = styled(Button)`
   margin-left: -0.75rem;
 `
 const Logo = styled.div`
-  width: ${props => (props.isPristine ? "2.5rem" : "2rem")};
-  height: ${props => (props.isPristine ? "2.5rem" : "2rem")};
-  transition: ${theme.transition};
+  width: ${props => (props.isPristine ? fontSize.h2 : fontSize.h3)};
+  height: ${props => (props.isPristine ? fontSize.h2 : fontSize.h3)};
+  max-height: 100%;
+  transition: ${theme.shortTransition};
   svg {
     display: block;
     margin: 0 auto;
@@ -61,7 +63,7 @@ const Logo = styled.div`
     height: 100%;
     fill: none;
     user-select: none;
-    transition: ${theme.transition};
+    transition: ${theme.shortTransition};
     #circle {
       stroke: ${props =>
         props.isDirty
@@ -69,7 +71,7 @@ const Logo = styled.div`
           : props.isToggled
           ? props.theme.nav.logo.primary
           : props.theme.nav.logo.pristine};
-      transition: ${theme.transition};
+      transition: ${theme.shortTransition};
     }
     #n {
       stroke: ${props =>
@@ -78,7 +80,7 @@ const Logo = styled.div`
           : props.isToggled
           ? props.theme.nav.logo.primary
           : props.theme.nav.logo.pristine};
-      transition: ${theme.transition};
+      transition: ${theme.shortTransition};
     }
   }
 `
@@ -102,16 +104,15 @@ const Links = styled.div`
   }
 `
 const NavLink = styled(AnchorLink)`
-  ${mixins.button};
   ${flex.between};
-  transition: ${theme.shortTransition};
 `
-const LinkWrapper = styled.div`
+const NavLinkButton = styled(Button)`
   color: ${props =>
     props.isDirty
       ? props.theme.nav.text.primary
       : props.theme.nav.text.pristine};
   font-weight: 600;
+  transition: ${theme.shortTransition};
   svg {
     width: ${fontSize.lg};
     height: ${fontSize.lg};
@@ -181,7 +182,7 @@ const Nav = () => {
       }
       setPrevY(y)
     }, 100),
-    [isMounted, prevY, scrollDirection, window]
+    [isMounted, prevY, scrollDirection]
   )
 
   const handleResize = useCallback(
@@ -194,6 +195,15 @@ const Nav = () => {
     [isDeviceMobile]
   )
 
+  const handleKeydown = useCallback(
+    throttle(e => {
+      if (e.which === 27 || e.key === "Escape") {
+        toggleHamburger()
+      }
+    }, 100),
+    [isHamburgerCooked]
+  )
+
   useEffect(() => {
     setDevice()
     const timeout = setTimeout(() => setIsMounted(true), 0)
@@ -204,6 +214,7 @@ const Nav = () => {
 
   useEventListener("scroll", handleScroll)
   useEventListener("resize", handleResize)
+  useEventListener("keydown", e => handleKeydown(e))
 
   return (
     <NavContainer scrollDirection={scrollDirection} isDirty={isDirty}>
@@ -215,7 +226,12 @@ const Nav = () => {
           <TransitionContainer>
             {isMounted && (
               <CSSTransition classNames="fade" timeout={timeout}>
-                <Link to="/" style={{ transitionDelay: `0ms` }}>
+                <Link
+                  to="/"
+                  style={{ transitionDelay: `0ms` }}
+                  aria-label="home"
+                  tabIndex={-1}
+                >
                   <LogoButton>
                     <Logo isToggled={isHamburgerCooked} isDirty={isDirty}>
                       <IconLogo />
@@ -242,41 +258,50 @@ const Nav = () => {
           </TransitionContainer>
         </Bread>
 
-        <Links>
-          <TransitionContainer>
-            {isMounted &&
-              navLinks &&
-              navLinks.map(({ url, name }, i) => (
-                <CSSTransition key={i} classNames="fadedown" timeout={timeout}>
-                  <NavLink
-                    href={url}
-                    offset={-32}
-                    style={{ transitionDelay: `${(i + 1) * 100}ms` }}
+        {!isDeviceMobile && (
+          <Links>
+            <TransitionContainer>
+              {isMounted &&
+                navLinks &&
+                navLinks.map(({ url, name }, i) => (
+                  <CSSTransition
+                    key={i}
+                    classNames="fadedown"
+                    timeout={timeout}
                   >
-                    <LinkWrapper isDirty={isDirty}>
-                      <FormattedIcon name={name} />
-                      {name}
-                    </LinkWrapper>
-                  </NavLink>
+                    <NavLink
+                      href={url}
+                      offset={-32}
+                      style={{ transitionDelay: `${(i + 1) * 100}ms` }}
+                      tabIndex={-1}
+                    >
+                      <NavLinkButton isDirty={isDirty}>
+                        <FormattedIcon name={name} />
+                        {name}
+                      </NavLinkButton>
+                    </NavLink>
+                  </CSSTransition>
+                ))}
+              {isMounted && (
+                <CSSTransition classNames="fadedown" timeout={timeout}>
+                  <ThemerWrapper style={{ transitionDelay: `400ms` }}>
+                    <Themer isDirty={isDirty} />
+                  </ThemerWrapper>
                 </CSSTransition>
-              ))}
-            {isMounted && (
-              <CSSTransition classNames="fadedown" timeout={timeout}>
-                <ThemerWrapper style={{ transitionDelay: `400ms` }}>
-                  <Themer isDirty={isDirty} />
-                </ThemerWrapper>
-              </CSSTransition>
-            )}
-          </TransitionContainer>
-        </Links>
+              )}
+            </TransitionContainer>
+          </Links>
+        )}
       </NavInner>
 
-      <Menu
-        isMenuOpen={isHamburgerCooked}
-        isDirty={isDirty}
-        navHeight={getNavHeight()}
-        toggleMenu={toggleHamburger}
-      />
+      {isDeviceMobile && (
+        <Menu
+          isMenuOpen={isHamburgerCooked}
+          isDirty={isDirty}
+          navHeight={getNavHeight()}
+          toggleMenu={toggleHamburger}
+        />
+      )}
     </NavContainer>
   )
 }

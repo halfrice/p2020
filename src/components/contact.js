@@ -25,22 +25,21 @@ const ContentContainer = styled.div`
 const Content = styled.div``
 
 const Contact = ({ data }) => {
-  const { frontmatter, html } = data
-  const { title } = frontmatter
+  const { frontmatter, html } = data[0].node
 
   const revealTitle = useRef(null)
   const revealContent = useRef(null)
   const revealSocial = useRef(null)
   useEffect(() => {
-    scrollreveal.reveal(revealTitle.current, scrollrevealConfig(200))
-    scrollreveal.reveal(revealContent.current, scrollrevealConfig(400))
-    scrollreveal.reveal(revealSocial.current, scrollrevealConfig(600))
+    scrollreveal.reveal(revealTitle.current, scrollrevealConfig(100))
+    scrollreveal.reveal(revealContent.current, scrollrevealConfig(200))
+    scrollreveal.reveal(revealSocial.current, scrollrevealConfig(300))
   }, [])
 
   return (
     <ContactContainer id="contact">
       <TitleContainer ref={revealTitle}>
-        <Title>{title}</Title>
+        <Title>{frontmatter.title}</Title>
       </TitleContainer>
       <ContentContainer ref={revealContent}>
         <Content dangerouslySetInnerHTML={{ __html: html }} />
@@ -51,7 +50,7 @@ const Contact = ({ data }) => {
 }
 
 Contact.propTypes = {
-  data: PropTypes.object.isRequired,
+  data: PropTypes.array.isRequired,
 }
 
 export default Contact

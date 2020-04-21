@@ -20,9 +20,7 @@ const ContentContainer = styled.div`
   width: 50%;
   ${device.tablet`width: 100%;`};
 `
-const Content = styled.div`
-  /* color: ${color.light}; */
-`
+const Content = styled.div``
 const ImageContainer = styled.div`
   background: transparent;
   border: 1px solid transparent;
@@ -37,7 +35,6 @@ const AvatarContainer = styled.div`
   margin-left: 3em;
   ${device.tablet`margin: 0 auto;`};
   ${mixins.shadow};
-  /* overflow: hidden; */
 `
 const Avatar = styled(Img)`
   background-color: ${color.dark};
@@ -47,15 +44,10 @@ const Avatar = styled(Img)`
   ${device.tablet`height: 15rem`};
   transition: ${theme.transition};
   object-fit: cover;
-  /* &:hover {
-    transform: scale(1.1);
-    ${device.tablet`transform: none`};
-  } */
 `
 
 const About = ({ data }) => {
-  const { frontmatter, html } = data
-  const { image, title } = frontmatter
+  const { frontmatter, html } = data[0].node
 
   const revealTitle = useRef(null)
   const revealContent = useRef(null)
@@ -66,14 +58,17 @@ const About = ({ data }) => {
 
   return (
     <AboutContainer id="about">
-      <Title ref={revealTitle}>{title}</Title>
+      <Title ref={revealTitle}>{frontmatter.title}</Title>
       <FlexContainer ref={revealContent}>
         <ContentContainer>
           <Content dangerouslySetInnerHTML={{ __html: html }} />
         </ContentContainer>
         <ImageContainer>
           <AvatarContainer>
-            <Avatar fluid={image.childImageSharp.fluid} alt="About image" />
+            <Avatar
+              fluid={frontmatter.image.childImageSharp.fluid}
+              alt="About image"
+            />
           </AvatarContainer>
         </ImageContainer>
       </FlexContainer>
@@ -82,7 +77,7 @@ const About = ({ data }) => {
 }
 
 About.propTypes = {
-  data: PropTypes.object.isRequired,
+  data: PropTypes.array.isRequired,
 }
 
 export default About

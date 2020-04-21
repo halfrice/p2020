@@ -1,6 +1,6 @@
 import { css } from "styled-components"
 import device from "./device"
-import theme from "./theme.yaml"
+import theme from "./theme.yml"
 
 const { color } = theme
 

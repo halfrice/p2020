@@ -5,7 +5,7 @@ import { CSSTransition, TransitionGroup } from "react-transition-group"
 import styled from "styled-components"
 import { device, mixins, Section, theme } from "~styles"
 
-const { color, fontSize } = theme
+const { fontSize } = theme
 const { flex } = mixins
 
 const HeroContainer = styled(Section)`
@@ -66,13 +66,12 @@ const Content = styled.p`
   font-size: ${fontSize.md};
   ${device.tablet`font-size: ${fontSize.sm};`};
   ${device.phone`font-size: ${fontSize.xs};`};
-  /* color: ${color.light}; */
 `
 
 const Hero = ({ data }) => {
   const [isMounted, setIsMounted] = useState(false)
 
-  const { frontmatter, html } = data
+  const { frontmatter, html } = data[0].node
 
   useEffect(() => {
     const timeout = setTimeout(() => setIsMounted(true), 1000)
@@ -121,7 +120,7 @@ const Hero = ({ data }) => {
 }
 
 Hero.propTypes = {
-  data: PropTypes.object.isRequired,
+  data: PropTypes.array.isRequired,
 }
 
 export default Hero
