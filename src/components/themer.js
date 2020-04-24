@@ -1,7 +1,7 @@
 import React, { useContext } from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
-import { Button, theme } from "~styles"
+import { theme } from "~styles"
 import { ThemeContext } from "~themes"
 import { FormattedIcon } from "~components/icons"
 
@@ -10,10 +10,6 @@ const { fontSize } = theme
 const ThemerContainer = styled.div`
   position: relative;
   z-index: 21;
-`
-const ThemerButton = styled(Button)`
-  margin-right: ${props => (props.isMobile ? `-0.75rem` : null)};
-  z-index: 22;
   color: ${props =>
     props.isDirty
       ? props.theme.nav.text.primary
@@ -32,24 +28,14 @@ const ThemerButton = styled(Button)`
         : props.theme.themer.icon.pristine};
     transition: ${theme.transition};
   }
-  &:active {
-    opacity: 1;
-  }
 `
 
 const Themer = ({ isDirty, isMobile }) => {
   const context = useContext(ThemeContext)
 
   return (
-    <ThemerContainer>
-      <ThemerButton
-        onClick={context.toggleTheme}
-        isDirty={isDirty}
-        isMobile={isMobile}
-        aria-label="Theme"
-      >
-        <FormattedIcon name={context.theme.icon} />
-      </ThemerButton>
+    <ThemerContainer isDirty={isDirty} isMobile={isMobile}>
+      <FormattedIcon name={context.theme.icon} />
     </ThemerContainer>
   )
 }

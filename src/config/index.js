@@ -20,15 +20,15 @@ module.exports = {
   navLinks: [
     {
       name: "About",
-      url: "#about",
+      url: "/#about",
     },
     {
       name: "Apps",
-      url: "#apps",
+      url: "/#apps",
     },
     {
       name: "Contact",
-      url: "#contact",
+      url: "/#contact",
     },
   ],
   footerLinks: [
@@ -76,7 +76,7 @@ module.exports = {
   ],
   scrollrevealConfig: (delay = 200) => ({
     origin: "bottom",
-    distance: "3rem",
+    distance: "4rem",
     rotate: { x: 0, y: 0, z: 0 },
     delay,
     useDelay: "always",

@@ -27,6 +27,7 @@ const Globals = createGlobalStyle`
     font-weight: 400;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
+    transition: background-color ${theme.time.medium} ${theme.easing};
     &.hidden {
       overflow: hidden;
     }
@@ -56,7 +57,6 @@ const Globals = createGlobalStyle`
     display: inline-block;
     position: relative;
     text-decoration: none;
-    outline: none;
   }
 
   p {
@@ -86,7 +86,7 @@ const Globals = createGlobalStyle`
 
   .fadeup-enter {
     opacity: 0.01;
-    transform: translateY(50px);
+    transform: translateY(3rem);
     transition: opacity 500ms ${theme.easing}, transform 500ms ${theme.easing};
   }
   .fadeup-enter-active {
@@ -96,7 +96,7 @@ const Globals = createGlobalStyle`
   }
   .fadedown-enter {
     opacity: 0.01;
-    transform: translateY(-25px);
+    transform: translateY(-2rem);
     transition: opacity 500ms ${theme.easing}, transform 500ms ${theme.easing};
   }
   .fadedown-enter-active {

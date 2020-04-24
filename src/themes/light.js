@@ -4,24 +4,28 @@ const { color } = theme
 
 const light = {
   name: "light",
-  icon: "Moon",
+  icon: "Sun",
   background: {
     primary: color.lightest,
   },
   text: {
-    primary: color.darkerestSlate,
+    primary: color.dark,
   },
   title: {
-    primary: color.darkestSlate,
+    primary: color.darkerSlate,
   },
   nav: {
-    background: color.black + "EE",
-    text: { primary: color.lightSlate, pristine: color.darkerSlate },
+    background: color.white + "F8",
+    text: { primary: color.darkerSlate, pristine: color.darkestSlate },
     icon: { primary: color.darkerSlate, pristine: color.darkestSlate },
-    logo: { primary: color.darkerSlate, pristine: color.darkestSlate },
+    logo: {
+      primary: color.darkerSlate,
+      hover: color.darkSlate,
+      pristine: color.darkestSlate,
+    },
   },
   themer: {
-    icon: { primary: color.lightPink, pristine: color.redmoon },
+    icon: { primary: color.peach, pristine: color.redmoon },
   },
   hero: {
     name: color.darkestSlate,
@@ -36,8 +40,8 @@ const light = {
     technology: color.darkSlate,
   },
   footer: {
-    text: color.darkerSlate,
-    links: color.darkestSlate,
+    text: color.dark,
+    links: color.lightRed,
   },
 }
 

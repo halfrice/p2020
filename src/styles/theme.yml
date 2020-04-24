@@ -54,7 +54,7 @@ color:
 
 font:
   ubuntu: "Ubuntu, -apple-system, system-ui, Open Sans, Roboto, Arial, sans-serif"
-  ubuntuMono: "Ubunto Mono, Roboto Mono, Inconsolata, monospace"
+  ubuntuMono: "Ubuntu Mono, Roboto Mono, Inconsolata, monospace"
 
 fontSize:
   default: "16px"

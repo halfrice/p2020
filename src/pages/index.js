@@ -4,9 +4,9 @@ import { graphql } from "gatsby"
 import { About, Apps, Contact, Featured, Hero, Layout } from "~components"
 import { Main } from "~styles"
 
-const IndexPage = ({ data }) => {
+const IndexPage = ({ data, location }) => {
   return (
-    <Layout>
+    <Layout location={location}>
       <Main>
         <Hero data={data.hero.edges} />
         <About data={data.about.edges} />
@@ -20,6 +20,7 @@ const IndexPage = ({ data }) => {
 
 IndexPage.propTypes = {
   data: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
 }
 
 export default IndexPage
@@ -33,7 +34,7 @@ export const indexPageQuery = graphql`
             avatar {
               childImageSharp {
                 fluid(maxWidth: 360, maxHeight: 360, quality: 90) {
-                  ...GatsbyImageSharpFluid_withWebp_tracedSVG
+                  ...GatsbyImageSharpFluid_withWebp
                 }
               }
             }

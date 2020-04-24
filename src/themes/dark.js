@@ -4,7 +4,7 @@ const { color } = theme
 
 const dark = {
   name: "dark",
-  icon: "Sun",
+  icon: "Moon",
   background: {
     primary: color.darker,
   },
@@ -15,13 +15,17 @@ const dark = {
     primary: color.darkSlate,
   },
   nav: {
-    background: color.black + "EE",
+    background: color.black + "F8",
     text: { primary: color.darkSlate, pristine: color.slate },
     icon: { primary: color.darkestSlate, pristine: color.darkerSlate },
-    logo: { primary: color.darkestSlate, pristine: color.darkerSlate },
+    logo: {
+      primary: color.darkestSlate,
+      hover: color.darkSlate,
+      pristine: color.darkerSlate,
+    },
   },
   themer: {
-    icon: { primary: color.orange, pristine: color.yellow },
+    icon: { primary: color.redmoon, pristine: color.peach },
   },
   hero: {
     name: color.darkestSlate,
@@ -32,12 +36,12 @@ const dark = {
     background: color.black,
     media: color.dark,
     title: color.darkerSlate,
-    description: color.lightSlate,
-    technology: color.darkerSlate,
+    description: color.light,
+    technology: color.lighterSlate,
   },
   footer: {
     text: color.slate,
-    links: color.darkerSlate,
+    links: color.lightRed,
   },
 }
 

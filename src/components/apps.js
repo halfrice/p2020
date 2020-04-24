@@ -19,6 +19,7 @@ const AppsContainer = styled(Section)`
   max-width: 64rem;
   padding-top: 0;
   ${device.tablet`padding-top: 0;`};
+  transition: all ${theme.time.medium} ${theme.easing};
 `
 const TransitionContainer = styled(TransitionGroup)`
   display: grid;

@@ -21,11 +21,11 @@ const HamburgerBars = styled.div`
     content: "";
     display: block;
     background-color: ${props =>
-      props.isDirty
+      props.isToggled
         ? props.theme.nav.text.primary
-        : props.isToggled
-        ? props.theme.nav.text.primary
-        : props.theme.nav.text.pristine};
+        : props.isDirty
+        ? props.theme.nav.icon.primary
+        : props.theme.nav.logo.pristine};
     position: absolute;
     width: ${hamburger.width};
     height: 2px;
@@ -54,7 +54,7 @@ const Hamburger = props => {
 }
 
 Hamburger.propTypes = {
-  isDirty: PropTypes.bool,
+  isDirty: PropTypes.bool.isRequired,
   isToggled: PropTypes.bool.isRequired,
 }
 

@@ -1,13 +1,14 @@
-import React, { useCallback, useEffect, useState } from "react"
+import React, { useCallback, useContext, useEffect, useState } from "react"
 import { Link } from "gatsby"
+import PropTypes from "prop-types"
 import { CSSTransition, TransitionGroup } from "react-transition-group"
 import { Helmet } from "react-helmet"
-import AnchorLink from "react-anchor-link-smooth-scroll"
 import styled from "styled-components"
-import { Hamburger, Menu, Themer } from "~components"
+import { Hamburger, Menu } from "~components"
 import { FormattedIcon, IconLogo } from "~components/icons"
 import { navLinks } from "~config"
-import { Button, device, Main, mixins, theme } from "~styles"
+import { device, Main, mixins, theme } from "~styles"
+import { ThemeContext } from "~themes"
 import { throttle, useEventListener } from "~utils"
 
 const { font, fontSize, nav } = theme
@@ -23,78 +24,80 @@ const NavContainer = styled(Main)`
     props.isDirty ? nav.heightMobile : nav.heightPristine};`};
   background-color: ${props =>
     props.isDirty ? props.theme.nav.background : "transparent"};
-  font-family: ${font.ubuntuMono};
-  font-size: ${fontSize.md};
-  font-weight: 600 !important;
   transition: ${theme.transition};
   filter: none !important;
   pointer-events: auto !important;
   user-select: auto !important;
   overflow-y: hidden;
   z-index: 21;
-  ${props => (props.isDirty ? mixins.boxShadow : null)};
+  ${props =>
+    props.isToggled ? null : props.isDirty ? mixins.boxShadow : null};
 `
-const NavInner = styled.nav`
+const Navbar = styled.nav`
   ${flex.between};
   position: relative;
   width: 100%;
   max-width: 64rem;
-  height: 100%;
+  font-family: ${font.ubuntuMono};
+  font-size: ${fontSize.md};
+  font-weight: 600;
   z-index: 22;
 `
-const TransitionContainer = styled(TransitionGroup)`
-  height: 100%;
-`
-const LogoContainer = styled.div`
-  ${flex.center};
-`
-const LogoButton = styled(Button)`
-  margin-left: -0.75rem;
-`
 const Logo = styled.div`
-  width: ${props => (props.isPristine ? fontSize.h2 : fontSize.h3)};
-  height: ${props => (props.isPristine ? fontSize.h2 : fontSize.h3)};
-  max-height: 100%;
-  transition: ${theme.shortTransition};
-  svg {
+  ${flex.center};
+  a {
     display: block;
     margin: 0 auto;
-    width: 100%;
-    height: 100%;
-    fill: none;
-    user-select: none;
-    transition: ${theme.shortTransition};
-    #circle {
-      stroke: ${props =>
-        props.isDirty
-          ? props.theme.nav.logo.primary
-          : props.isToggled
-          ? props.theme.nav.logo.primary
-          : props.theme.nav.logo.pristine};
-      transition: ${theme.shortTransition};
+    width: ${props => (props.isDirty ? fontSize.h3 : fontSize.h2)};
+    height: ${props => (props.isDirty ? fontSize.h3 : fontSize.h2)};
+    transition: ${theme.transition};
+    &:hover,
+    &:focus {
+      svg {
+        #circle {
+          stroke: ${props => props.theme.nav.logo.hover};
+        }
+        #n {
+          stroke: ${props => props.theme.nav.logo.hover};
+        }
+      }
     }
-    #n {
-      stroke: ${props =>
-        props.isDirty
-          ? props.theme.nav.logo.primary
-          : props.isToggled
-          ? props.theme.nav.logo.primary
-          : props.theme.nav.logo.pristine};
+    svg {
+      fill: none;
       transition: ${theme.shortTransition};
+      user-select: none;
+      #circle {
+        stroke: ${props =>
+          props.isToggled
+            ? props.isDirty
+              ? props.theme.nav.logo.primary
+              : props.theme.nav.logo.pristine
+            : props.isDirty
+            ? props.theme.nav.logo.primary
+            : props.theme.nav.logo.pristine};
+      }
+      #n {
+        stroke: ${props =>
+          props.isToggled
+            ? props.isDirty
+              ? props.theme.nav.logo.primary
+              : props.theme.nav.logo.pristine
+            : props.isDirty
+            ? props.theme.nav.logo.primary
+            : props.theme.nav.logo.pristine};
+      }
     }
   }
 `
-const Bread = styled.div`
+const HamburgerButton = styled.div`
+  ${flex.center};
   display: none;
   ${device.tablet`display: flex;`};
-`
-const HamburgerButton = styled(Button)`
-  margin-right: -0.75rem;
-  &:active,
-  &:hover,
-  &:focus {
-    opacity: 1;
-  }
+  margin: 0 -0.5rem 0 0;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  text-transform: none;
+  overflow: visible;
 `
 const Links = styled.div`
   ${flex.center};
@@ -103,10 +106,9 @@ const Links = styled.div`
     ${flex.between};
   }
 `
-const NavLink = styled(AnchorLink)`
-  ${flex.between};
-`
-const NavLinkButton = styled(Button)`
+const LinkButton = styled.div`
+  margin: 0 0.625rem;
+  padding: 0.5rem 0.25rem;
   color: ${props =>
     props.isDirty
       ? props.theme.nav.text.primary
@@ -124,20 +126,46 @@ const NavLinkButton = styled(Button)`
     transition: ${theme.shortTransition};
   }
 `
-const ThemerWrapper = styled.div`
-  margin-right: -0.75rem;
+const ThemerButton = styled.div`
+  margin-right: -0.5rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  overflow: visible;
+`
+const Themer = styled.div`
+  position: relative;
+  z-index: 21;
+  color: ${props =>
+    props.isDirty
+      ? props.theme.nav.text.primary
+      : props.isMobile
+      ? props.theme.nav.text.primary
+      : props.theme.nav.text.pristine};
+  transition: ${theme.transition};
+  svg {
+    width: ${fontSize.lg};
+    height: ${fontSize.lg};
+    fill: ${props =>
+      props.isDirty
+        ? props.theme.themer.icon.primary
+        : props.isMobile
+        ? props.theme.themer.icon.primary
+        : props.theme.themer.icon.pristine};
+    transition: ${theme.transition};
+  }
 `
 
-const Nav = () => {
-  const [isMounted, setIsMounted] = useState(false)
+const Nav = ({ isHome }) => {
+  const [isMounted, setIsMounted] = useState(!isHome)
   const [isDeviceMobile, setIsDeviceMobile] = useState(false)
   const [isHamburgerCooked, setIsHamburgerCooked] = useState(false)
   const [scrollDirection, setScrollDirection] = useState("none")
   const [prevY, setPrevY] = useState(0)
 
-  const isPristine = scrollDirection === "none"
   const isDirty = scrollDirection !== "none"
-  const timeout = isPristine ? 3000 : 0
+  const timeout = isHome ? 3000 : 0
+
+  const themeContext = useContext(ThemeContext)
 
   const toggleHamburger = () => {
     setIsHamburgerCooked(!isHamburgerCooked)
@@ -217,82 +245,88 @@ const Nav = () => {
   useEventListener("keydown", e => handleKeydown(e))
 
   return (
-    <NavContainer scrollDirection={scrollDirection} isDirty={isDirty}>
+    <NavContainer
+      scrollDirection={scrollDirection}
+      isDirty={isDirty}
+      isToggled={isHamburgerCooked}
+    >
       <Helmet>
         <body className={isHamburgerCooked ? "hidden" : ""} />
       </Helmet>
-      <NavInner>
-        <LogoContainer>
-          <TransitionContainer>
-            {isMounted && (
-              <CSSTransition classNames="fade" timeout={timeout}>
-                <Link
-                  to="/"
-                  style={{ transitionDelay: `0ms` }}
-                  aria-label="home"
-                  tabIndex={-1}
-                >
-                  <LogoButton>
-                    <Logo isToggled={isHamburgerCooked} isDirty={isDirty}>
-                      <IconLogo />
-                    </Logo>
-                  </LogoButton>
-                </Link>
-              </CSSTransition>
-            )}
-          </TransitionContainer>
-        </LogoContainer>
+      <Navbar>
+        <TransitionGroup component={null}>
+          {isMounted && (
+            <CSSTransition classNames="fade" timeout={timeout}>
+              <Logo
+                isToggled={isHamburgerCooked}
+                isDirty={isDirty}
+                tabindex="-1"
+              >
+                {isHome ? (
+                  <a href="/" aria-label="home">
+                    <IconLogo />
+                  </a>
+                ) : (
+                  <Link to="/" aria-label="home">
+                    <IconLogo />
+                  </Link>
+                )}
+              </Logo>
+            </CSSTransition>
+          )}
+        </TransitionGroup>
 
-        <Bread>
-          <TransitionContainer>
-            {isMounted && (
-              <CSSTransition classNames="fade" timeout={timeout}>
-                <HamburgerButton
-                  onClick={toggleHamburger}
-                  style={{ transitionDelay: `100ms` }}
-                >
-                  <Hamburger isToggled={isHamburgerCooked} isDirty={isDirty} />
-                </HamburgerButton>
-              </CSSTransition>
-            )}
-          </TransitionContainer>
-        </Bread>
+        <TransitionGroup component={null}>
+          {isMounted && (
+            <CSSTransition classNames="fade" timeout={timeout}>
+              <HamburgerButton onClick={toggleHamburger} tabindex="-1">
+                <Hamburger isToggled={isHamburgerCooked} isDirty={isDirty} />
+              </HamburgerButton>
+            </CSSTransition>
+          )}
+        </TransitionGroup>
 
-        {!isDeviceMobile && (
-          <Links>
-            <TransitionContainer>
-              {isMounted &&
-                navLinks &&
-                navLinks.map(({ url, name }, i) => (
-                  <CSSTransition
-                    key={i}
-                    classNames="fadedown"
-                    timeout={timeout}
+        <Links>
+          <TransitionGroup component={null}>
+            {isMounted &&
+              navLinks &&
+              navLinks.map(({ url, name }, i) => (
+                <CSSTransition
+                  key={i}
+                  classNames={`fadedown`}
+                  timeout={timeout}
+                >
+                  <Link
+                    to={url}
+                    style={{
+                      transitionDelay: `${isHome ? (i + 1) * 100 : 0}ms`,
+                    }}
                   >
-                    <NavLink
-                      href={url}
-                      offset={-32}
-                      style={{ transitionDelay: `${(i + 1) * 100}ms` }}
-                      tabIndex={-1}
-                    >
-                      <NavLinkButton isDirty={isDirty}>
-                        <FormattedIcon name={name} />
-                        {name}
-                      </NavLinkButton>
-                    </NavLink>
-                  </CSSTransition>
-                ))}
-              {isMounted && (
-                <CSSTransition classNames="fadedown" timeout={timeout}>
-                  <ThemerWrapper style={{ transitionDelay: `400ms` }}>
-                    <Themer isDirty={isDirty} />
-                  </ThemerWrapper>
+                    <LinkButton isDirty={isDirty}>
+                      <FormattedIcon name={name} />
+                      {name}
+                    </LinkButton>
+                  </Link>
                 </CSSTransition>
-              )}
-            </TransitionContainer>
-          </Links>
-        )}
-      </NavInner>
+              ))}
+            {isMounted && (
+              <CSSTransition classNames="fadedown" timeout={timeout}>
+                <ThemerButton
+                  onClick={themeContext.toggleTheme}
+                  style={{
+                    transitionDelay: `${isHome ? navLinks.length * 100 : 0}ms`,
+                  }}
+                  tabindex="0"
+                >
+                  <Themer isDirty={isDirty} isMobile={isDeviceMobile}>
+                    <FormattedIcon name={themeContext.theme.icon} />
+                  </Themer>
+                </ThemerButton>
+              </CSSTransition>
+            )}
+          </TransitionGroup>
+        </Links>
+      </Navbar>
 
       {isDeviceMobile && (
         <Menu
@@ -304,6 +338,10 @@ const Nav = () => {
       )}
     </NavContainer>
   )
+}
+
+Nav.propTypes = {
+  isHome: PropTypes.bool.isRequired,
 }
 
 export default Nav
